@@ -58,17 +58,19 @@ export class PlayerSystem {
     }
 
     handleMovement() {
+        const speed = this.player.speed;
+
         if (this.keysPressed["KeyA"]) {
-            this.player.container.position.x -= this.player.speed;
+            this.player.container.position.x -= speed;
         }
         if (this.keysPressed["KeyD"]) {
-            this.player.container.position.x += this.player.speed;
+            this.player.container.position.x += speed
         }
         if (this.keysPressed["KeyS"]) {
-            this.player.container.position.y += this.player.speed;
+            this.player.container.position.y += speed;
         }
         if (this.keysPressed["KeyW"]) {
-            this.player.container.position.y -= this.player.speed;
+            this.player.container.position.y -= speed;
         }
 
         if (this.player.container.position.x <= 0) {
@@ -87,16 +89,16 @@ export class PlayerSystem {
         const world: Container = this.containerMap[CONTAINER_NAMES.WORLD];
 
         if (this.keysPressed["KeyD"] && this.player.container.position.x > 650) {
-            this.camera.poz.x -= this.camera.speed;
+            this.camera.poz.x -= speed;
         }
         if (this.keysPressed["KeyA"] && this.player.container.position.x < WORLD_SETTINGS.width - 650) {
-            this.camera.poz.x += this.camera.speed;
+            this.camera.poz.x += speed;
         }
         if (this.keysPressed["KeyW"] && this.player.container.position.y < WORLD_SETTINGS.height - 512) {
-            this.camera.poz.y += this.camera.speed;
+            this.camera.poz.y += speed;
         }
         if (this.keysPressed["KeyS"] && this.player.container.position.y > 500) {
-            this.camera.poz.y -= this.camera.speed;
+            this.camera.poz.y -= speed;
         }
 
         if (this.camera.poz.x > 0) {
