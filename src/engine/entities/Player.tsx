@@ -11,6 +11,10 @@ export class Player {
     container: PIXI.Container;
     hitpoints: number;
 
+    skills: Array<{type: string, dmg: number, tickInterval: number, lastTick: number}> = [
+        {type: "dart", dmg: 10, tickInterval: 1500, lastTick: 0},
+    ]
+
     constructor() {
         const rectangle = new PIXI.Graphics();
         rectangle.beginFill('#AF1414');

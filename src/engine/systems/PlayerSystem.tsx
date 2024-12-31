@@ -3,6 +3,8 @@ import {Player} from "../entities/Player";
 import {CANVAS_OPTION, CONTAINER_NAMES, LAYERS, WORLD_SETTINGS} from "../config";
 import * as PIXI from "pixi.js";
 import {GameCamera} from "../entities/Camera";
+import {Projectile} from "../entities/Projectile";
+import {Enemy} from "../entities/Enemy";
 
 export class PlayerSystem {
     containerMap: Record<string, Container>
@@ -11,6 +13,8 @@ export class PlayerSystem {
     mainApp: PIXI.Application;
     mapCenter: PIXI.Container;
     camera: GameCamera;
+    projectileList: Projectile[];
+    enemyList: Array<Enemy>;
 
     constructor(
         player: Player,
@@ -18,6 +22,8 @@ export class PlayerSystem {
         keysPressed: Record<string, any>,
         mainApp: PIXI.Application,
         camera: GameCamera,
+        projectileList: Projectile[],
+        enemyList: Array<Enemy>
     ) {
         this.containerMap = containerMap;
         this.player = player;
@@ -25,6 +31,8 @@ export class PlayerSystem {
         this.mainApp = mainApp;
         this.mapCenter = new PIXI.Container();
         this.camera = camera;
+        this.projectileList = projectileList;
+        this.enemyList = enemyList;
     }
 
     init() {
@@ -107,5 +115,24 @@ export class PlayerSystem {
         if (this.camera.poz.x < -world.width + this.mainApp.screen.width) {
             this.camera.poz.x = -world.width + this.mainApp.screen.width
         }
+    }
+
+    handleShooting(delta: PIXI.Ticker) {
+        for (let i = 0; i < this.player.skills.length; i++) {
+            const {tickInterval, lastTick} = this.player.skills[i];
+            if (lastTick + tickInterval < delta.lastTime) {
+                this.player.skills[i].lastTick = delta.lastTime;
+                this.createBullet();
+            }
+        }
+    }
+
+    createBullet() {
+        const size = {width: 16, height:16}
+
+        const target = this.enemyList[0]? this.enemyList[0].container.position : {x: -45, y: -45}
+        const bullet = new Projectile(this.player.getPosition(), size, target);
+        this.projectileList.push(bullet);
+        this.containerMap[CONTAINER_NAMES.WORLD].addChild(bullet.container);
     }
 }

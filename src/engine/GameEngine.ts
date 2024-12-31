@@ -10,6 +10,8 @@ import {Player} from "./entities/Player";
 import {Enemy} from "./entities/Enemy";
 import {EnemySystem} from "./systems/EnemySystem";
 import {SpawnSystem} from "./systems/SpawnSystem";
+import {Projectile} from "./entities/Projectile";
+import {ProjectileSystem} from "./systems/ProjectileSystem";
 
 export class GameEngine {
     mainApp: PIXI.Application;
@@ -19,6 +21,7 @@ export class GameEngine {
     textureMap: Record<string, Texture> = {};
     player: Player  = new Player();
     enemyList: Array<Enemy> = [];
+    projectileList: Array<Projectile> = [];
 
     keySystem: KeySystem;
     containerSystem: ContainerSystem;
@@ -26,6 +29,7 @@ export class GameEngine {
     playerSystem: PlayerSystem;
     enemySystem: EnemySystem;
     spawnSystem: SpawnSystem;
+    projectileSystem: ProjectileSystem;
 
     constructor() {
         this.mainApp = new PIXI.Application();
@@ -35,9 +39,10 @@ export class GameEngine {
         this.keySystem = new KeySystem(this.keysPressed);
         this.cameraSystem = new CameraSystem(this.camera, this.containerMap, this.keysPressed, this.mainApp);
 
-        this.playerSystem = new PlayerSystem( this.player, this.containerMap, this.keysPressed, this.mainApp, this.camera)
+        this.playerSystem = new PlayerSystem( this.player, this.containerMap, this.keysPressed, this.mainApp, this.camera, this.projectileList, this.enemyList)
         this.enemySystem = new EnemySystem(this.enemyList, this.player, this.containerMap);
         this.spawnSystem = new SpawnSystem(this.enemyList, this.containerMap);
+        this.projectileSystem = new ProjectileSystem(this.projectileList, this.enemyList, this.containerMap);
     }
 
     async initGameCanvas() {
@@ -52,12 +57,15 @@ export class GameEngine {
         this.cameraSystem.initBGSprite();
         this.playerSystem.init();
 
-        this.mainApp.ticker.add(() => {
+        this.mainApp.ticker.add((delta) => {
             this.cameraSystem.handleCameraMovement();
             this.playerSystem.handleMovement();
+            this.playerSystem.handleShooting(delta);
             this.enemySystem.handleMovement();
             this.enemySystem.handleCollision();
             this.spawnSystem.spawnEnemy();
+            this.projectileSystem.handleMovement();
+            this.projectileSystem.handleBulletCollision();
         })
     }
 }
