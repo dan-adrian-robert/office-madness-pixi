@@ -39,6 +39,17 @@ export const GameView = () => {
                         console.log(gameEngine.containerMap)
                     }} variant={'contained'}>LOG ALL</Button>
 
+                    <Button onClick={()=> {
+                        gameEngine.pauseGame();
+                    }} variant={'contained'}>Pause</Button>
+
+                    <Button onClick={()=> {
+                        gameEngine.showLevelGui();
+                    }} variant={'contained'}>Show Skill GUI</Button>
+
+                    <Button onClick={()=> {
+                        gameEngine.showLevelGui();
+                    }} variant={'contained'}>Refresh Skills</Button>
                 </Box>
             </Box>
             <div id='gameCanvas'/>

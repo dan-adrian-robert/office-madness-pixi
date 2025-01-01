@@ -19,9 +19,35 @@ export const WORLD_SETTINGS = {
 export enum CONTAINER_NAMES {
     WORLD = 'WORLD',
     PLAYER = 'PLAYER',
+    TOP_BAR = 'TOP_BAR',
+    SKILL_GUI = 'SKILL_GUI',
+    SKILL_1 = 'SKILL_1',
+    SKILL_2 = 'SKILL_2',
+    SKILL_3 = 'SKILL_3',
 }
 
 export const LAYERS: Record<CONTAINER_NAMES, number> = {
     WORLD: 100,
     PLAYER: 200,
+    TOP_BAR: 200,
+    SKILL_GUI: 300,
+    SKILL_1: 300,
+    SKILL_2: 300,
+    SKILL_3: 300,
 }
+
+export const LEVEL_EXPERIENCE: Record<number, number> = {
+    1: 5,
+    2: 5,
+    3: 5,
+    4: 5,
+    5: 5,
+    6: 5,
+    7: 5,
+}
+
+export const PLAYER_UPGRADES = [
+    {type:'ATTACK_SPEED', name: 'Attack Speed', value: 100},
+    {type:'DAMAGE', name: 'Damage', value: 5},
+    {type:'SPEED', name: 'Speed', value: 1},
+]

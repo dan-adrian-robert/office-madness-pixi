@@ -10,9 +10,11 @@ export class Player {
     }
     container: PIXI.Container;
     hitpoints: number;
+    level: number;
+    experience: number;
 
     skills: Array<{type: string, dmg: number, tickInterval: number, lastTick: number}> = [
-        {type: "dart", dmg: 10, tickInterval: 1500, lastTick: 0},
+        {type: "dart", dmg: 10, tickInterval: 1200, lastTick: 0},
     ]
 
     constructor() {
@@ -21,7 +23,7 @@ export class Player {
         rectangle.drawRect(0, 0, this.size.x, this.size.y);
         rectangle.endFill();
         rectangle.interactive = true;
-        rectangle.cursor ='crosshair'
+        rectangle.cursor = 'crosshair'
         rectangle.x = 0;
         rectangle.y = 0;
 
@@ -35,10 +37,29 @@ export class Player {
         }
         this.container.addChild(rectangle)
         this.hitpoints = 100;
+        this.experience = 0;
+        this.level = 1;
     }
 
     getPosition() {
         return this.container.position;
     }
 
+    upgrade(config:{type:string, name: string, value: number}) {
+        const {type, value} = config;
+
+        switch (type){
+            case 'SPEED':
+                this.speed += value;
+                break;
+            case 'DAMAGE':
+                this.skills[0].dmg += value;
+                break;
+            case 'ATTACK_SPEED':
+                this.skills[0].tickInterval -= value;
+                break;
+        }
+
+        console.log(this);
+    }
 }

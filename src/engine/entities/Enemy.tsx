@@ -10,6 +10,7 @@ export class Enemy {
     }
     container: PIXI.Container;
     hitpoints: number;
+    bounty: number;
 
     constructor() {
         const rectangle = new PIXI.Graphics();
@@ -30,7 +31,8 @@ export class Enemy {
             y: 256,
         }
         this.container.addChild(rectangle)
-        this.hitpoints = 100;
+        this.hitpoints = 50;
+        this.bounty = 10;
     }
 
 }

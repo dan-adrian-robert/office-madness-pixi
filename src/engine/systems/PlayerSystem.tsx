@@ -1,6 +1,6 @@
 import {Container} from "pixi.js";
 import {Player} from "../entities/Player";
-import {CANVAS_OPTION, CONTAINER_NAMES, LAYERS, WORLD_SETTINGS} from "../config";
+import {CANVAS_OPTION, CONTAINER_NAMES, LAYERS, LEVEL_EXPERIENCE, WORLD_SETTINGS} from "../config";
 import * as PIXI from "pixi.js";
 import {GameCamera} from "../entities/Camera";
 import {Projectile} from "../entities/Projectile";
@@ -15,6 +15,8 @@ export class PlayerSystem {
     camera: GameCamera;
     projectileList: Projectile[];
     enemyList: Array<Enemy>;
+    levelText: PIXI.Text;
+    gameState: any;
 
     constructor(
         player: Player,
@@ -23,7 +25,8 @@ export class PlayerSystem {
         mainApp: PIXI.Application,
         camera: GameCamera,
         projectileList: Projectile[],
-        enemyList: Array<Enemy>
+        enemyList: Array<Enemy>,
+        gameState: any
     ) {
         this.containerMap = containerMap;
         this.player = player;
@@ -33,6 +36,8 @@ export class PlayerSystem {
         this.camera = camera;
         this.projectileList = projectileList;
         this.enemyList = enemyList;
+        this.levelText = new PIXI.Text();
+        this.gameState = gameState;
     }
 
     init() {
@@ -131,8 +136,46 @@ export class PlayerSystem {
         const size = {width: 16, height:16}
 
         const target = this.enemyList[0]? this.enemyList[0].container.position : {x: -45, y: -45}
-        const bullet = new Projectile(this.player.getPosition(), size, target);
+        const bullet = new Projectile(this.player.getPosition(), size, target, 25);
         this.projectileList.push(bullet);
         this.containerMap[CONTAINER_NAMES.WORLD].addChild(bullet.container);
+    }
+
+    initExperienceGuy() {
+        const style = new PIXI.TextStyle({
+            fontFamily: 'Arial',
+            fontSize: 14,
+            stroke: '#f0f3e4',
+        });
+
+        const {level, experience} = this.player;
+
+        this.levelText = new PIXI.Text(`Level ${level} Exp ${experience} / ${LEVEL_EXPERIENCE[level + 1]}`, style);
+
+        const textContainer = new Container();
+        textContainer.width = 64;
+        textContainer.height = 64;
+        textContainer.addChild(this.levelText);
+
+        textContainer.position.y = 15
+        textContainer.position.x = 15
+
+        this.containerMap[CONTAINER_NAMES.TOP_BAR].addChild(textContainer);
+    }
+
+    renderExperienceGui() {
+        const {level, experience} = this.player;
+        this.levelText.text = `Level ${level} Exp ${experience} / ${LEVEL_EXPERIENCE[level]}`;
+    }
+
+    handleLevelingUp() {
+        const targetExperience = LEVEL_EXPERIENCE[this.player.level] || 5;
+
+        if (this.player.experience >= targetExperience) {
+            this.player.experience -= targetExperience;
+            this.player.level += 1;
+            this.gameState.paused = true;
+            this.containerMap[CONTAINER_NAMES.SKILL_GUI].visible = true;
+        }
     }
 }

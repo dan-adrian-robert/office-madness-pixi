@@ -11,8 +11,9 @@ export class Projectile {
     }
     target: PointData;
     container: PIXI.Container;
+    damage: number
 
-    constructor(position: PointData, size:{width:number, height:number}, target: PointData) {
+    constructor(position: PointData, size:{width:number, height:number}, target: PointData, damage: number) {
         const {width, height} = size;
         const rectangle = new PIXI.Graphics();
         rectangle.beginFill('#0de351');
@@ -28,6 +29,7 @@ export class Projectile {
         this.container.name = 'bullet';
 
         this.target = target;
+        this.damage = damage;
         this.container.position = position;
         this.container.addChild(rectangle)
     }

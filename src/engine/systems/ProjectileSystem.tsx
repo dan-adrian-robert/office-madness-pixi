@@ -2,20 +2,24 @@ import {Projectile} from "../entities/Projectile";
 import {Enemy} from "../entities/Enemy";
 import {CONTAINER_NAMES} from "../config";
 import {Container} from "pixi.js";
+import {Player} from "../entities/Player";
 
 export class ProjectileSystem {
     projectileList: Projectile[];
     enemyList: Array<Enemy>;
+    player: Player;
     containerMap: Record<string, Container> = {};
 
     constructor(
         projectileList: Projectile[],
         enemyList: Array<Enemy>,
         containerMap: Record<string, Container> = {},
+        player: Player,
     ) {
         this.projectileList = projectileList;
         this.enemyList = enemyList;
         this.containerMap = containerMap;
+        this.player = player;
     }
 
     handleMovement() {
@@ -48,9 +52,10 @@ export class ProjectileSystem {
                 if (distance < bullet.speed) {
                     this.containerMap[CONTAINER_NAMES.WORLD].removeChild(bullet.container);
                     this.projectileList.splice(bulletIndex, 1)
-                    enemy.hitpoints -= 1;
+                    enemy.hitpoints -= bullet.damage;
 
                     if(enemy.hitpoints <= 0) {
+                        this.player.experience += enemy.bounty;
                         this.containerMap[CONTAINER_NAMES.WORLD].removeChild(enemy.container);
                         this.enemyList.splice(enemyIndex, 1)
                     }
