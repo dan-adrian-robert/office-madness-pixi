@@ -1,13 +1,10 @@
 import * as PIXI from "pixi.js";
-import {Container} from "pixi.js";
-import {LAYERS} from "../config";
+import {buildContainer, buildSquare} from "../utils";
+import {PointData} from "pixi.js/lib/maths/point/PointData";
 
 export class Player {
-    speed: number = 7;
-    size = {
-        x: 32,
-        y: 32,
-    }
+    speed: number;
+    size: PointData
     container: PIXI.Container;
     hitpoints: number;
     level: number;
@@ -17,28 +14,20 @@ export class Player {
         {type: "dart", dmg: 10, tickInterval: 1200, lastTick: 0},
     ]
 
-    constructor() {
-        const rectangle = new PIXI.Graphics();
-        rectangle.beginFill('#AF1414');
-        rectangle.drawRect(0, 0, this.size.x, this.size.y);
-        rectangle.endFill();
-        rectangle.interactive = true;
-        rectangle.cursor = 'crosshair'
-        rectangle.x = 0;
-        rectangle.y = 0;
+    constructor(playerConfig: any) {
+        const {graphicsConfig, containerConfig, metadata} = playerConfig;
 
-        this.container = new Container();
-        this.container._zIndex = LAYERS.PLAYER;
-        this.container.name = 'player';
-
-        this.container.position = {
-            x: 512,
-            y: 412,
-        }
+        const rectangle = buildSquare(graphicsConfig);
+        this.container = buildContainer(containerConfig);
         this.container.addChild(rectangle)
-        this.hitpoints = 100;
-        this.experience = 0;
-        this.level = 1;
+
+        const {speed, size, hitpoints, experience, level} = metadata;
+
+        this.hitpoints = hitpoints;
+        this.experience = experience;
+        this.level = level;
+        this.speed = speed;
+        this.size = size;
     }
 
     getPosition() {
@@ -59,7 +48,5 @@ export class Player {
                 this.skills[0].tickInterval -= value;
                 break;
         }
-
-        console.log(this);
     }
 }

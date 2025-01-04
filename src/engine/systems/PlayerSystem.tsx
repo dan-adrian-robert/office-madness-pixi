@@ -5,6 +5,7 @@ import * as PIXI from "pixi.js";
 import {GameCamera} from "../entities/Camera";
 import {Projectile} from "../entities/Projectile";
 import {Enemy} from "../entities/Enemy";
+import * as projectileConfig from "../../configurations/projectile.config.json"
 
 export class PlayerSystem {
     containerMap: Record<string, Container>
@@ -127,16 +128,16 @@ export class PlayerSystem {
             const {tickInterval, lastTick} = this.player.skills[i];
             if (lastTick + tickInterval < delta.lastTime) {
                 this.player.skills[i].lastTick = delta.lastTime;
-                this.createBullet();
+                if (this.enemyList.length) {
+                    this.createBullet();
+                }
             }
         }
     }
 
     createBullet() {
-        const size = {width: 16, height:16}
-
         const target = this.enemyList[0]? this.enemyList[0].container.position : {x: -45, y: -45}
-        const bullet = new Projectile(this.player.getPosition(), size, target, 25);
+        const bullet = new Projectile(this.player.getPosition(), target, projectileConfig);
         this.projectileList.push(bullet);
         this.containerMap[CONTAINER_NAMES.WORLD].addChild(bullet.container);
     }

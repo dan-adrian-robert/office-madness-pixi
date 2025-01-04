@@ -13,6 +13,7 @@ import {SpawnSystem} from "./systems/SpawnSystem";
 import {Projectile} from "./entities/Projectile";
 import {ProjectileSystem} from "./systems/ProjectileSystem";
 import {UpgrageSystem} from "./systems/UpgrageSystem";
+import * as playerConfig from '../configurations/player.config.json';
 
 export class GameEngine {
     mainApp: PIXI.Application;
@@ -20,7 +21,7 @@ export class GameEngine {
     keysPressed: Record<string, boolean> = {};
     containerMap: Record<string, Container> = {};
     textureMap: Record<string, Texture> = {};
-    player: Player  = new Player();
+    player: Player  = new Player(playerConfig);
     enemyList: Array<Enemy> = [];
     projectileList: Array<Projectile> = [];
 

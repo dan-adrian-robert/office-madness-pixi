@@ -1,0 +1,25 @@
+{
+  "metadata": {
+    "speed": 7,
+    "size": {
+      "x": 32,
+      "y": 32
+    },
+    "hitpoints":100,
+    "experience": 0,
+    "level": 1
+  },
+  "graphicsConfig": {
+    "color": "#AF1414",
+    "width": 32,
+    "height": 32
+  },
+  "containerConfig": {
+    "position": {
+      "x": 512,
+      "y": 412
+    },
+    "zIndex": 200,
+    "name": "player"
+  }
+}

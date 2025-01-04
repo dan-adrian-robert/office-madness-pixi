@@ -1,6 +1,7 @@
 import {Enemy} from "../entities/Enemy";
 import {Container} from "pixi.js";
 import {CONTAINER_NAMES} from "../config";
+import * as enemyConfig from '../../configurations/enemy.config.json';
 
 export class SpawnSystem {
     containerMap: Record<string, Container> = {};
@@ -24,7 +25,7 @@ export class SpawnSystem {
         this.spawnTick += this.spawnSpeed;
 
         if (this.spawnTick >= this.spawnMaxTick) {
-            const enemy = new Enemy();
+            const enemy = new Enemy(enemyConfig);
 
             this.containerMap[CONTAINER_NAMES.WORLD].addChild(enemy.container);
             this.enemyList.push(enemy);

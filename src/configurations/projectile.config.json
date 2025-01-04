@@ -1,0 +1,20 @@
+{
+  "metadata": {
+    "size": {
+      "x": 16,
+      "y": 16
+    },
+    "speed": 15,
+    "damage": 5
+  },
+  "graphicsConfig": {
+    "color": "#0de351",
+    "width": 16,
+    "height": 16,
+    "alpha": 0.7
+  },
+  "containerConfig": {
+    "zIndex": 200,
+    "name": "bullet"
+  }
+}

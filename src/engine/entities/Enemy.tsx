@@ -1,38 +1,24 @@
 import * as PIXI from "pixi.js";
-import {Container} from "pixi.js";
-import {LAYERS} from "../config";
+import {PointData} from "pixi.js/lib/maths/point/PointData";
+import {buildContainer, buildSquare} from "../utils";
 
 export class Enemy {
-    speed: number = 3;
-    size = {
-        x: 32,
-        y: 32,
-    }
+    speed: number;
+    size: PointData;
     container: PIXI.Container;
     hitpoints: number;
     bounty: number;
 
-    constructor() {
-        const rectangle = new PIXI.Graphics();
-        rectangle.beginFill('#0dcae3');
-        rectangle.drawRect(0, 0, this.size.x, this.size.y);
-        rectangle.endFill();
-        rectangle.cursor ='crosshair'
-        rectangle.alpha = 0.7;
-        rectangle.x = 0;
-        rectangle.y = 0;
-
-        this.container = new Container();
-        this.container._zIndex = LAYERS.PLAYER;
-        this.container.name = 'enemy';
-
-        this.container.position = {
-            x: 256,
-            y: 256,
-        }
+    constructor(config: any) {
+        const {metadata, graphicsConfig, containerConfig} = config;
+        const rectangle = buildSquare(graphicsConfig);
+        this.container = buildContainer(containerConfig);
         this.container.addChild(rectangle)
-        this.hitpoints = 50;
-        this.bounty = 10;
-    }
 
+        const {bounty, hitpoints, size, speed} = metadata
+        this.hitpoints = hitpoints;
+        this.bounty = bounty;
+        this.size = size;
+        this.speed = speed;
+    }
 }
