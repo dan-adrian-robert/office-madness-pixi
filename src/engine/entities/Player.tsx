@@ -1,6 +1,8 @@
 import * as PIXI from "pixi.js";
-import {buildContainer, buildSquare} from "../utils";
+import {buildContainer, buildSquare, getSkillConfiguration} from "../utils";
 import {PointData} from "pixi.js/lib/maths/point/PointData";
+import {Skill} from "./Skill";
+import {SKILL_UPGRADE} from "../../types";
 
 export class Player {
     speed: number;
@@ -9,10 +11,7 @@ export class Player {
     hitpoints: number;
     level: number;
     experience: number;
-
-    skills: Array<{type: string, dmg: number, tickInterval: number, lastTick: number}> = [
-        {type: "dart", dmg: 10, tickInterval: 1200, lastTick: 0},
-    ]
+    skills: Array<Skill> = [];
 
     constructor(playerConfig: any) {
         const {graphicsConfig, containerConfig, metadata} = playerConfig;
@@ -21,7 +20,10 @@ export class Player {
         this.container = buildContainer(containerConfig);
         this.container.addChild(rectangle)
 
-        const {speed, size, hitpoints, experience, level} = metadata;
+        const {speed, size, hitpoints, experience, level, firstSkill} = metadata;
+
+        const skill = new Skill(getSkillConfiguration(firstSkill));
+        this.skills = [skill];
 
         this.hitpoints = hitpoints;
         this.experience = experience;
@@ -38,13 +40,13 @@ export class Player {
         const {type, value} = config;
 
         switch (type){
-            case 'SPEED':
+            case SKILL_UPGRADE.SPEED:
                 this.speed += value;
                 break;
-            case 'DAMAGE':
-                this.skills[0].dmg += value;
+            case SKILL_UPGRADE.DAMAGE:
+                this.skills[0].damage += value;
                 break;
-            case 'ATTACK_SPEED':
+            case SKILL_UPGRADE.ATTACK_SPEED:
                 this.skills[0].tickInterval -= value;
                 break;
         }

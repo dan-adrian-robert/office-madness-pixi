@@ -7,7 +7,8 @@
     },
     "hitpoints":100,
     "experience": 0,
-    "level": 1
+    "level": 1,
+    "firstSkill": "arrow"
   },
   "graphicsConfig": {
     "color": "#AF1414",

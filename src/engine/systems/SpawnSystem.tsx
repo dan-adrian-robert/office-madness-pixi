@@ -21,6 +21,10 @@ export class SpawnSystem {
         this.containerMap = containerMap;
     }
 
+    run() {
+        this.spawnEnemy();
+    }
+
     spawnEnemy() {
         this.spawnTick += this.spawnSpeed;
 

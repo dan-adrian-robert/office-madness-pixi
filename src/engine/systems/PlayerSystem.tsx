@@ -71,6 +71,13 @@ export class PlayerSystem {
         this.mapCenter = container;
     }
 
+    run(delta: any) {
+        this.handleMovement();
+        this.handleShooting(delta)
+        this.renderExperienceGui();
+        this.handleLevelingUp();
+    }
+
     handleMovement() {
         const speed = this.player.speed;
 

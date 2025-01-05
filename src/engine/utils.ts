@@ -1,6 +1,7 @@
 import {Container, Graphics} from "pixi.js";
 import * as PIXI from "pixi.js";
 import {BuildContainerConfig, GraphicsConfig} from "../types";
+import * as SKILL_CONFIG from '../configurations/skills.config.json';
 
 export const buildContainer = (config: BuildContainerConfig): Container => {
     const {width, height, name, zIndex, position} = config;
@@ -30,4 +31,15 @@ export const buildSquare = (config: GraphicsConfig): Graphics => {
     rectangle.alpha = alpha || 1;
 
     return rectangle;
+}
+
+export const getSkillConfiguration = (skillType: 'arrow' | 'fireBolt' | 'iceBolt') => {
+    const config = SKILL_CONFIG[skillType];
+    const {tickInterval, type, damage} = config;
+
+    return {
+        tickInterval,
+        type,
+        damage
+    }
 }

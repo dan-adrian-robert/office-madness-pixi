@@ -18,6 +18,11 @@ export class EnemySystem {
         this.containerMap = containerMap
     }
 
+    run() {
+        this.handleMovement();
+        this.handleCollision();
+    }
+
     handleMovement() {
         const target = this.player.getPosition();
 

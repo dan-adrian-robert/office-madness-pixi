@@ -76,16 +76,11 @@ export class GameEngine {
                 return;
             }
 
-            this.cameraSystem.handleCameraMovement();
-            this.playerSystem.handleMovement();
-            this.playerSystem.handleShooting(delta);
-            this.enemySystem.handleMovement();
-            this.enemySystem.handleCollision();
-            this.spawnSystem.spawnEnemy();
-            this.projectileSystem.handleMovement();
-            this.projectileSystem.handleBulletCollision();
-            this.playerSystem.renderExperienceGui();
-            this.playerSystem.handleLevelingUp();
+            this.cameraSystem.run();
+            this.projectileSystem.run();
+            this.enemySystem.run();
+            this.spawnSystem.run();
+            this.playerSystem.run(delta);
         })
     }
 

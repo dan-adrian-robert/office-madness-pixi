@@ -25,3 +25,9 @@ export type GraphicsConfig = {
     height: number
     alpha?: number
 }
+
+export enum SKILL_UPGRADE {
+    'SPEED' = 'SPEED',
+    'DAMAGE' = 'DAMAGE',
+    'ATTACK_SPEED' = 'ATTACK_SPEED'
+}

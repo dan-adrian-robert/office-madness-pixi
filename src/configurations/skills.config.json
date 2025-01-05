@@ -1,0 +1,17 @@
+{
+  "arrow": {
+    "tickInterval": 1200,
+    "type": "arrow",
+    "damage": 10
+  },
+  "fireBolt": {
+    "tickInterval": 2000,
+    "type": "fireBolt",
+    "damage": 30
+  },
+  "iceBolt": {
+    "tickInterval": 1000,
+    "type": "iceBolt",
+    "damage": 5
+  }
+}

@@ -22,6 +22,11 @@ export class ProjectileSystem {
         this.player = player;
     }
 
+    run() {
+        this.handleMovement();
+        this.handleBulletCollision()
+    }
+
     handleMovement() {
         this.projectileList.forEach((bullet) => {
             const dx = bullet.target.x - bullet.container.x;
@@ -83,5 +88,4 @@ export class ProjectileSystem {
             }
         })
     }
-
 }

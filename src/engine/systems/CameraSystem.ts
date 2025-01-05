@@ -100,4 +100,8 @@ export class CameraSystem {
         world.y = this.camera.poz.y;
 
     }
+
+    run() {
+        this.handleCameraMovement();
+    }
 }
