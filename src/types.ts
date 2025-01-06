@@ -1,17 +1,5 @@
 import {PointData} from "pixi.js/lib/maths/point/PointData";
 
-export enum RESOURCE {
-    FOOD = 'FOOD',
-    WOOD = 'WOOD',
-    IRON = 'IRON',
-}
-export enum DIRECTION {
-    RIGHT = 'RIGHT',
-    LEFT = 'LEFT',
-}
-
-export type Nullable<T> = T | null;
-
 export type BuildContainerConfig = {
     width: number,
     height: number,
@@ -26,8 +14,13 @@ export type GraphicsConfig = {
     alpha?: number
 }
 
-export enum SKILL_UPGRADE {
-    'SPEED' = 'SPEED',
-    'DAMAGE' = 'DAMAGE',
-    'ATTACK_SPEED' = 'ATTACK_SPEED'
+export enum SKILL_NAME {
+    arrow = 'arrow',
+    fireBolt = 'arrow',
+    iceBolt = 'arrow',
+}
+
+export type SkillConfig = {
+    tickInterval: number,
+    damage: number
 }

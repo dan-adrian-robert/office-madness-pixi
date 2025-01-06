@@ -1,7 +1,10 @@
-import {Container, Graphics} from "pixi.js";
+import {Container, Graphics, Point} from "pixi.js";
 import * as PIXI from "pixi.js";
 import {BuildContainerConfig, GraphicsConfig} from "../types";
 import * as SKILL_CONFIG from '../configurations/skills.config.json';
+import {PointData} from "pixi.js/lib/maths/point/PointData";
+import {CANVAS_OPTION} from "./config";
+import {Enemy} from "./entities/Enemy";
 
 export const buildContainer = (config: BuildContainerConfig): Container => {
     const {width, height, name, zIndex, position} = config;
@@ -42,4 +45,31 @@ export const getSkillConfiguration = (skillType: 'arrow' | 'fireBolt' | 'iceBolt
         type,
         damage
     }
+}
+
+export const generateRandomSpawnPoint = (): PointData => {
+
+    const left = getRandomInt(100) % 2 === 0 ? 1 : 0;
+    const top = getRandomInt(100) % 2 === 0 ? 1 : 0;
+
+    return {
+        x: 45  + (CANVAS_OPTION.width  - 45) * left,
+        y: 45  + (CANVAS_OPTION.height - 45) * top,
+    }
+}
+
+export const getRandomInt = (max: number) => {
+    return Math.floor(Math.random() * max);
+}
+
+export const getEnemiesInRange = (enemyList: Array<Enemy>, range: number, poz: PointData): Array<Enemy> => {
+
+    return enemyList.filter((enemy) => {
+        const {position} = enemy.container;
+
+        const distance = Math.sqrt(
+            Math.pow(position.x - poz.x, 2) + Math.pow(position.y - poz.y, 2)
+        );
+        return distance <= range;
+    });
 }

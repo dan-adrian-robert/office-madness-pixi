@@ -55,9 +55,6 @@ export class ProjectileSystem {
                 const distance = Math.sqrt(dx * dx + dy * dy);
 
                 if (distance < bullet.speed) {
-
-                    console.log(bullet);
-                    console.log(enemy);
                     this.containerMap[CONTAINER_NAMES.WORLD].removeChild(bullet.container);
                     this.projectileList.splice(bulletIndex, 1)
                     enemy.hitpoints -= bullet.damage;

@@ -2,7 +2,7 @@ import * as PIXI from "pixi.js";
 import {buildContainer, buildSquare, getSkillConfiguration} from "../utils";
 import {PointData} from "pixi.js/lib/maths/point/PointData";
 import {Skill} from "./Skill";
-import {SKILL_UPGRADE} from "../../types";
+import {SkillConfig} from "../../types";
 
 export class Player {
     speed: number;
@@ -11,7 +11,7 @@ export class Player {
     hitpoints: number;
     level: number;
     experience: number;
-    skills: Array<Skill> = [];
+    skills: Record<string, Skill>;
 
     constructor(playerConfig: any) {
         const {graphicsConfig, containerConfig, metadata} = playerConfig;
@@ -23,7 +23,9 @@ export class Player {
         const {speed, size, hitpoints, experience, level, firstSkill} = metadata;
 
         const skill = new Skill(getSkillConfiguration(firstSkill));
-        this.skills = [skill];
+        this.skills = {
+            [skill.type] : skill,
+        }
 
         this.hitpoints = hitpoints;
         this.experience = experience;
@@ -36,19 +38,42 @@ export class Player {
         return this.container.position;
     }
 
-    upgrade(config:{type:string, name: string, value: number}) {
-        const {type, value} = config;
+    getSkillLevels(): Record<string, number> {
+        const output: Record<string, number> = {};
 
-        switch (type){
-            case SKILL_UPGRADE.SPEED:
-                this.speed += value;
-                break;
-            case SKILL_UPGRADE.DAMAGE:
-                this.skills[0].damage += value;
-                break;
-            case SKILL_UPGRADE.ATTACK_SPEED:
-                this.skills[0].tickInterval -= value;
-                break;
+        for (let skillsKey in this.skills) {
+            const skill = this.skills[skillsKey];
+            const {type, level} = skill;
+
+            output[type] = level;
         }
+
+        return output;
+    }
+
+    upgrade(skillName: string, levels: Record<number,SkillConfig>) {
+
+        const hasSkill = !!this.skills[skillName];
+
+        if (!hasSkill) {
+            this.skills[skillName] = new Skill({...levels[1], type: skillName});
+        } else {
+            const {level} = this.skills[skillName];
+            const skillConfig = levels[level + 1];
+            this.skills[skillName].upgrade(skillConfig);
+        }
+    }
+
+    getSkillDetails(): Array<string> {
+        const skillDetails = [];
+
+        for (let skillName in this.skills) {
+            const skill = this.skills[skillName];
+            const {type, level, damage} = skill;
+
+            skillDetails.push(`${type} - Level ${level} - damage ${damage}`);
+        }
+
+        return skillDetails;
     }
 }

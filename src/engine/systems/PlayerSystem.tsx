@@ -1,11 +1,14 @@
 import {Container} from "pixi.js";
 import {Player} from "../entities/Player";
-import {CANVAS_OPTION, CONTAINER_NAMES, LAYERS, LEVEL_EXPERIENCE, WORLD_SETTINGS} from "../config";
+import {CANVAS_OPTION, CONTAINER_NAMES, LAYERS, WORLD_SETTINGS} from "../config";
 import * as PIXI from "pixi.js";
 import {GameCamera} from "../entities/Camera";
 import {Projectile} from "../entities/Projectile";
 import {Enemy} from "../entities/Enemy";
 import * as projectileConfig from "../../configurations/projectile.config.json"
+import {Skill} from "../entities/Skill";
+import * as levelExperience from "../../configurations/level.experience.config.json"
+import {generateRandomSpawnPoint, getEnemiesInRange} from "../utils";
 
 export class PlayerSystem {
     containerMap: Record<string, Container>
@@ -18,6 +21,7 @@ export class PlayerSystem {
     enemyList: Array<Enemy>;
     levelText: PIXI.Text;
     gameState: any;
+    experienceRequired: Record<number, number>;
 
     constructor(
         player: Player,
@@ -27,7 +31,7 @@ export class PlayerSystem {
         camera: GameCamera,
         projectileList: Projectile[],
         enemyList: Array<Enemy>,
-        gameState: any
+        gameState: any,
     ) {
         this.containerMap = containerMap;
         this.player = player;
@@ -39,6 +43,8 @@ export class PlayerSystem {
         this.enemyList = enemyList;
         this.levelText = new PIXI.Text();
         this.gameState = gameState;
+
+        this.experienceRequired = levelExperience;
     }
 
     init() {
@@ -131,19 +137,24 @@ export class PlayerSystem {
     }
 
     handleShooting(delta: PIXI.Ticker) {
-        for (let i = 0; i < this.player.skills.length; i++) {
-            const {tickInterval, lastTick} = this.player.skills[i];
+
+        for (const skillName in this.player.skills) {
+            const {tickInterval, lastTick, range} = this.player.skills[skillName];
+
             if (lastTick + tickInterval < delta.lastTime) {
-                this.player.skills[i].lastTick = delta.lastTime;
-                if (this.enemyList.length) {
-                    this.createBullet();
+                const enemiesInRange = getEnemiesInRange(this.enemyList, range ,this.player.getPosition())
+                if(enemiesInRange.length > 0) {
+                    this.player.skills[skillName].lastTick = delta.lastTime;
+                    this.createBullet(this.player.skills[skillName]);
                 }
             }
         }
     }
 
-    createBullet() {
-        const target = this.enemyList[0]? this.enemyList[0].container.position : {x: -45, y: -45}
+    createBullet(skill: Skill) {
+        const enemiesInRange = getEnemiesInRange(this.enemyList, skill.range, this.player.getPosition());
+
+        const target = enemiesInRange[0] ? enemiesInRange[0].container.position : generateRandomSpawnPoint();
         const bullet = new Projectile(this.player.getPosition(), target, projectileConfig);
         this.projectileList.push(bullet);
         this.containerMap[CONTAINER_NAMES.WORLD].addChild(bullet.container);
@@ -158,7 +169,7 @@ export class PlayerSystem {
 
         const {level, experience} = this.player;
 
-        this.levelText = new PIXI.Text(`Level ${level} Exp ${experience} / ${LEVEL_EXPERIENCE[level + 1]}`, style);
+        this.levelText = new PIXI.Text(`Level ${level} Exp ${experience} / ${this.experienceRequired[level + 1]}`, style);
 
         const textContainer = new Container();
         textContainer.width = 64;
@@ -173,11 +184,14 @@ export class PlayerSystem {
 
     renderExperienceGui() {
         const {level, experience} = this.player;
-        this.levelText.text = `Level ${level} Exp ${experience} / ${LEVEL_EXPERIENCE[level]}`;
+
+        const skillDetails = this.player.getSkillDetails().join('   :   ');
+
+        this.levelText.text = `Level ${level} Exp ${experience} / ${this.experienceRequired[level]} === ${skillDetails}`;
     }
 
     handleLevelingUp() {
-        const targetExperience = LEVEL_EXPERIENCE[this.player.level] || 5;
+        const targetExperience = this.experienceRequired[this.player.level] || 5;
 
         if (this.player.experience >= targetExperience) {
             this.player.experience -= targetExperience;

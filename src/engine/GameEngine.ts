@@ -12,7 +12,7 @@ import {EnemySystem} from "./systems/EnemySystem";
 import {SpawnSystem} from "./systems/SpawnSystem";
 import {Projectile} from "./entities/Projectile";
 import {ProjectileSystem} from "./systems/ProjectileSystem";
-import {UpgrageSystem} from "./systems/UpgrageSystem";
+import {UpgradeSystem} from "./systems/UpgradeSystem";
 import * as playerConfig from '../configurations/player.config.json';
 
 export class GameEngine {
@@ -32,7 +32,7 @@ export class GameEngine {
     enemySystem: EnemySystem;
     spawnSystem: SpawnSystem;
     projectileSystem: ProjectileSystem;
-    upgradeSystem: UpgrageSystem;
+    upgradeSystem: UpgradeSystem;
     gameState: {
         paused: boolean
     } = {
@@ -54,7 +54,7 @@ export class GameEngine {
         this.enemySystem = new EnemySystem(this.enemyList, this.player, this.containerMap);
         this.spawnSystem = new SpawnSystem(this.enemyList, this.containerMap);
         this.projectileSystem = new ProjectileSystem(this.projectileList, this.enemyList, this.containerMap, this.player);
-        this.upgradeSystem = new UpgrageSystem(this.containerMap, this.player, this.gameState);
+        this.upgradeSystem = new UpgradeSystem(this.containerMap, this.player, this.gameState);
     }
 
     async initGameCanvas() {

@@ -13,5 +13,6 @@
     "tickInterval": 1000,
     "type": "iceBolt",
     "damage": 5
-  }
+  },
+  "skillList": ["arrow", "fireBolt", "iceBolt"]
 }
