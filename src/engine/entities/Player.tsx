@@ -69,9 +69,9 @@ export class Player {
 
         for (let skillName in this.skills) {
             const skill = this.skills[skillName];
-            const {type, level, damage} = skill;
+            const {type, level, damage, tickInterval} = skill;
 
-            skillDetails.push(`${type} - Level ${level} - damage ${damage}`);
+            skillDetails.push(`${type} - Lvl ${level} dmg:${damage} as:${tickInterval}`);
         }
 
         return skillDetails;

@@ -139,23 +139,24 @@ export class PlayerSystem {
     handleShooting(delta: PIXI.Ticker) {
 
         for (const skillName in this.player.skills) {
-            const {tickInterval, lastTick, range} = this.player.skills[skillName];
+            const {tickInterval, lastTick, range, color} = this.player.skills[skillName];
 
             if (lastTick + tickInterval < delta.lastTime) {
                 const enemiesInRange = getEnemiesInRange(this.enemyList, range ,this.player.getPosition())
                 if(enemiesInRange.length > 0) {
                     this.player.skills[skillName].lastTick = delta.lastTime;
-                    this.createBullet(this.player.skills[skillName]);
+                    this.createBullet(this.player.skills[skillName], color);
                 }
             }
         }
     }
 
-    createBullet(skill: Skill) {
+    createBullet(skill: Skill, color: string) {
         const enemiesInRange = getEnemiesInRange(this.enemyList, skill.range, this.player.getPosition());
 
         const target = enemiesInRange[0] ? enemiesInRange[0].container.position : generateRandomSpawnPoint();
-        const bullet = new Projectile(this.player.getPosition(), target, projectileConfig);
+
+        const bullet = new Projectile(this.player.getPosition(), target, projectileConfig, color);
         this.projectileList.push(bullet);
         this.containerMap[CONTAINER_NAMES.WORLD].addChild(bullet.container);
     }
@@ -187,7 +188,7 @@ export class PlayerSystem {
 
         const skillDetails = this.player.getSkillDetails().join('   :   ');
 
-        this.levelText.text = `Level ${level} Exp ${experience} / ${this.experienceRequired[level]} === ${skillDetails}`;
+        this.levelText.text = `Level ${level} Exp ${experience} / ${this.experienceRequired[level]} $ SKILLS: ${skillDetails}`;
     }
 
     handleLevelingUp() {

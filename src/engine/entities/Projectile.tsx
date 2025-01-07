@@ -9,10 +9,10 @@ export class Projectile {
     container: PIXI.Container;
     damage: number
 
-    constructor(position: PointData, target: PointData, config: any ) {
+    constructor(position: PointData, target: PointData, config: any, color: string) {
         const {graphicsConfig, containerConfig, metadata} = config;
 
-        const rectangle = buildSquare(graphicsConfig);
+        const rectangle = buildSquare({...graphicsConfig, color});
         this.container = buildContainer(containerConfig);
         this.container.position = position;
         this.container.addChild(rectangle)

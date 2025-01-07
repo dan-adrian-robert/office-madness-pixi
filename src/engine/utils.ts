@@ -1,10 +1,10 @@
-import {Container, Graphics, Point} from "pixi.js";
+import {Container, Graphics} from "pixi.js";
 import * as PIXI from "pixi.js";
 import {BuildContainerConfig, GraphicsConfig} from "../types";
-import * as SKILL_CONFIG from '../configurations/skills.config.json';
 import {PointData} from "pixi.js/lib/maths/point/PointData";
 import {CANVAS_OPTION} from "./config";
 import {Enemy} from "./entities/Enemy";
+import * as SKILL_CONFIG from '../configurations/skill.levels.json'
 
 export const buildContainer = (config: BuildContainerConfig): Container => {
     const {width, height, name, zIndex, position} = config;
@@ -38,12 +38,16 @@ export const buildSquare = (config: GraphicsConfig): Graphics => {
 
 export const getSkillConfiguration = (skillType: 'arrow' | 'fireBolt' | 'iceBolt') => {
     const config = SKILL_CONFIG[skillType];
-    const {tickInterval, type, damage} = config;
+    const {tickInterval, damage} = config[1];
+
+    const randomSkills = ["#E15757FF", "#54BF79FF", "#7B53E4FF"]
+    const color = randomSkills[Math.floor(Math.random() * randomSkills.length)];
 
     return {
         tickInterval,
-        type,
-        damage
+        type: skillType,
+        damage,
+        color,
     }
 }
 

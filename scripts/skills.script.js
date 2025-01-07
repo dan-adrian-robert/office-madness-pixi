@@ -33,7 +33,7 @@ const playerLevels = new Array(100).fill(0).map((_, i) => {return i +1})
 const levelExperienceConfig = {}
 
 playerLevels.forEach((item, levelIndex) => {
-    levelExperienceConfig[`${item}`] = item * 10;
+    levelExperienceConfig[`${item}`] = 40 + item * 10;
 })
 
 const playerLevelsJSONData = JSON.stringify(levelExperienceConfig, null, 4);

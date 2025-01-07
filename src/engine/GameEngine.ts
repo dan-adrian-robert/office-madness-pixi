@@ -69,7 +69,7 @@ export class GameEngine {
         this.cameraSystem.initBGSprite();
         this.playerSystem.init();
         this.playerSystem.initExperienceGuy();
-        this.upgradeSystem.generateRandomSkills();
+        this.upgradeSystem.init();
 
         this.mainApp.ticker.add((delta) => {
             if(this.gameState.paused) {
@@ -81,6 +81,7 @@ export class GameEngine {
             this.enemySystem.run();
             this.spawnSystem.run();
             this.playerSystem.run(delta);
+            this.upgradeSystem.run();
         })
     }
 
