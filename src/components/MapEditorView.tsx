@@ -20,7 +20,6 @@ export const GameView = () => {
         loadAllTextures().then((textureList)=>{
             gameEngine.initGameCanvas().then(() => {
                 document.getElementById('gameCanvas')?.appendChild(gameEngine.mainApp.canvas);
-                gameEngine.initSystems();
 
                 initDevtools({
                     app: gameEngine.mainApp,
@@ -36,7 +35,7 @@ export const GameView = () => {
             <Box display={'flex'} flexDirection={'row'} gap={'1em'} alignItems={'center'}>
                 <Box>
                     <Button onClick={()=> {
-                        console.log(gameEngine.containerMap)
+                        console.log(gameEngine)
                     }} variant={'contained'}>LOG ALL</Button>
 
                     <Button onClick={()=> {
@@ -44,11 +43,11 @@ export const GameView = () => {
                     }} variant={'contained'}>Pause</Button>
 
                     <Button onClick={()=> {
-                        gameEngine.showLevelGui();
+                        // gameEngine.showLevelGui();
                     }} variant={'contained'}>Show Skill GUI</Button>
 
                     <Button onClick={()=> {
-                        gameEngine.showLevelGui();
+                        // gameEngine.showLevelGui();
                     }} variant={'contained'}>Refresh Skills</Button>
                 </Box>
             </Box>

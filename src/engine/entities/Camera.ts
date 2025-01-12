@@ -1,24 +1,25 @@
 import * as PIXI from "pixi.js";
+import {PointData} from "pixi.js/lib/maths/point/PointData";
 
 export class GameCamera {
     speed: number = 15;
-    dragging= false;
-    drag = {
+    dragging: boolean = false;
+    drag: PointData = {
         x: 0,
         y: 0,
     }
 
-    dragStart= {
+    dragStart: PointData = {
         x: 0,
         y: 0,
     };
 
-    poz= {
+    poz: PointData = {
         x: 0,
         y: 0,
     }
 
-    constructor(poz: {x: number, y: number}) {
+    constructor(poz: PointData) {
         this.poz = poz;
     }
 

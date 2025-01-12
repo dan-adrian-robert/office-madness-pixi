@@ -24,3 +24,9 @@ export type SkillConfig = {
     tickInterval: number,
     damage: number
 }
+
+export enum GAME_STATE {
+    MENU = 'MENU',
+    GAME_PLAY = 'GAME_PLAY',
+    GAME_OVER = 'GAME_OVER',
+}
