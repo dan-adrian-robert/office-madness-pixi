@@ -1,6 +1,6 @@
 import {Container, Graphics} from "pixi.js";
 import * as PIXI from "pixi.js";
-import {BuildContainerConfig, GraphicsConfig} from "../types";
+import {BuildContainerConfig, GraphicsConfig, SpriteConfig} from "../types";
 import {PointData} from "pixi.js/lib/maths/point/PointData";
 import {CANVAS_OPTION} from "./config";
 import {Enemy} from "./entities/Enemy";
@@ -76,4 +76,26 @@ export const getEnemiesInRange = (enemyList: Array<Enemy>, range: number, poz: P
         );
         return distance <= range;
     });
+}
+
+export const buildButton = (config: GraphicsConfig, spriteConfig: SpriteConfig, textConfig: any) => {
+    const sprite: PIXI.Sprite = new PIXI.Sprite();
+
+    const {position, zIndex, name} = spriteConfig;
+    sprite.position = position
+    sprite.label = name;
+    sprite.zIndex = zIndex;
+
+    const graphics = buildSquare(config);
+    sprite.addChild(graphics)
+    sprite.cursor = 'crosshair'
+    sprite.eventMode = 'dynamic';
+    sprite.interactive = true;
+
+    const {text, style} = textConfig;
+
+    const titleText = new PIXI.Text(text, style);
+    sprite.addChild(titleText);
+
+    return sprite;
 }

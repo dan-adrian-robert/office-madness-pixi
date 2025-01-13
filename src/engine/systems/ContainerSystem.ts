@@ -5,15 +5,16 @@ import {CANVAS_OPTION, CONTAINER_NAMES, LAYERS, WORLD_SETTINGS} from "../config"
 export class ContainerSystem {
     containerMap: Record<string, Container>
     textureMap: Record<string, Texture>
-    mainApp: PIXI.Application;
+    // mainApp: PIXI.Application;
+    mainContainer: Container;
 
     constructor(
         containerMap:  Record<string, Container>,
-        mainApp: PIXI.Application,
+        mainContainer: Container,
         textureMap: Record<string, Texture>
     ) {
         this.containerMap = containerMap;
-        this.mainApp = mainApp;
+        this.mainContainer = mainContainer;
         this.textureMap = textureMap;
     }
 
@@ -45,8 +46,8 @@ export class ContainerSystem {
 
         topBar.addChild(rectangle);
 
-        this.mainApp.stage.addChild(world);
-        this.mainApp.stage.addChild(topBar);
+        this.mainContainer.addChild(world);
+        this.mainContainer.addChild(topBar);
         this.addContainer(world, CONTAINER_NAMES.WORLD);
         this.addContainer(topBar, CONTAINER_NAMES.TOP_BAR);
 
@@ -80,7 +81,7 @@ export class ContainerSystem {
         skillGUI.addChild(skill2)
         skillGUI.addChild(skill3)
 
-        this.mainApp.stage.addChild(skillGUI);
+        this.mainContainer.addChild(skillGUI);
         this.addContainer(skillGUI, CONTAINER_NAMES.SKILL_GUI);
         this.addContainer(skill1, CONTAINER_NAMES.SKILL_1);
         this.addContainer(skill2, CONTAINER_NAMES.SKILL_2);

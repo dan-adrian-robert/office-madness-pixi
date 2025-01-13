@@ -16,7 +16,7 @@ import {Projectile} from "../entities/Projectile";
 
 export class GamePlayScreen {
     app: PIXI.Application;
-    container: PIXI.Container;
+    mainContainer: PIXI.Container;
 
     camera: GameCamera;
     keysPressed: Record<string, boolean> = {};
@@ -35,23 +35,26 @@ export class GamePlayScreen {
     projectileSystem: ProjectileSystem;
     upgradeSystem: UpgradeSystem;
     gameState: any;
+    gameLoopFunction: any;
 
     constructor(app: PIXI.Application, gameState: any, goToFunction: any) {
         this.app = app;
         this.gameState = gameState;
-        this.container = new PIXI.Container();
-        this.container.name = "GamePlayScreen";
-        app.stage.addChild(this.container);
+        this.mainContainer = new PIXI.Container();
+        this.mainContainer.name = "GamePlayScreen";
+        app.stage.addChild(this.mainContainer);
 
         this.camera = new GameCamera({x: 0, y: 0});
 
-        this.containerSystem = new ContainerSystem(this.containerMap, this.app, this.textureMap);
+        this.containerSystem = new ContainerSystem(this.containerMap, this.mainContainer, this.textureMap);
         this.keySystem = new KeySystem(this.keysPressed);
-        this.cameraSystem = new CameraSystem(this.camera, this.containerMap, this.keysPressed, this.app);
+        this.cameraSystem = new CameraSystem(this.camera, this.containerMap, this.keysPressed, this.mainContainer);
 
+        // ===========
         this.playerSystem = new PlayerSystem(
             this.player, this.containerMap, this.keysPressed,
-            this.app, this.camera, this.projectileList, this.enemyList, this.gameState,
+            this.mainContainer, this.camera, this.projectileList, this.enemyList,
+            this.gameState, goToFunction
         )
         this.enemySystem = new EnemySystem(this.enemyList, this.player, this.containerMap);
         this.spawnSystem = new SpawnSystem(this.enemyList, this.containerMap);
@@ -70,7 +73,9 @@ export class GamePlayScreen {
         this.playerSystem.initExperienceGuy();
         this.upgradeSystem.init();
 
-        this.app.ticker.add((delta) => {
+
+        this.gameLoopFunction = (delta: PIXI.Ticker)=> {
+            console.log('ticker stuff');
             if(this.gameState.paused) {
                 return;
             }
@@ -81,10 +86,13 @@ export class GamePlayScreen {
             this.spawnSystem.run();
             this.playerSystem.run(delta);
             this.upgradeSystem.run();
-        })
+        }
+
+        this.app.ticker.add(this.gameLoopFunction);
     }
 
     destroy() {
-        this.container.destroy({ children: true });
+        this.app.ticker.remove(this.gameLoopFunction);
+        this.mainContainer.destroy({ children: true });
     }
 }

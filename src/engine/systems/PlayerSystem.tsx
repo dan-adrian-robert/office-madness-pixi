@@ -14,7 +14,7 @@ export class PlayerSystem {
     containerMap: Record<string, Container>
     keysPressed: Record<string, boolean> = {};
     player: Player;
-    mainApp: PIXI.Application;
+    mainContainer: PIXI.Container;
     mapCenter: PIXI.Container;
     camera: GameCamera;
     projectileList: Projectile[];
@@ -22,27 +22,30 @@ export class PlayerSystem {
     levelText: PIXI.Text;
     gameState: any;
     experienceRequired: Record<number, number>;
+    goToEndScreen: any
 
     constructor(
         player: Player,
         containerMap:  Record<string, Container>,
         keysPressed: Record<string, any>,
-        mainApp: PIXI.Application,
+        mainContainer: PIXI.Container,
         camera: GameCamera,
         projectileList: Projectile[],
         enemyList: Array<Enemy>,
         gameState: any,
+        goToEndScreen: any,
     ) {
         this.containerMap = containerMap;
         this.player = player;
         this.keysPressed = keysPressed;
-        this.mainApp = mainApp;
+        this.mainContainer = mainContainer;
         this.mapCenter = new PIXI.Container();
         this.camera = camera;
         this.projectileList = projectileList;
         this.enemyList = enemyList;
         this.levelText = new PIXI.Text();
         this.gameState = gameState;
+        this.goToEndScreen = goToEndScreen;
 
         this.experienceRequired = levelExperience;
     }
@@ -73,7 +76,7 @@ export class PlayerSystem {
 
         container.addChild(rectangle)
 
-        this.mainApp.stage.addChild(container);
+        this.mainContainer.addChild(container);
         this.mapCenter = container;
     }
 
@@ -82,6 +85,7 @@ export class PlayerSystem {
         this.handleShooting(delta)
         this.renderExperienceGui();
         this.handleLevelingUp();
+        this.checkStatus();
     }
 
     handleMovement() {
@@ -131,8 +135,8 @@ export class PlayerSystem {
         if (this.camera.poz.x > 0) {
             this.camera.poz.x = 0;
         }
-        if (this.camera.poz.x < -world.width + this.mainApp.screen.width) {
-            this.camera.poz.x = -world.width + this.mainApp.screen.width
+        if (this.camera.poz.x < -world.width + this.mainContainer.width) {
+            this.camera.poz.x = -world.width + this.mainContainer.width
         }
     }
 
@@ -188,7 +192,7 @@ export class PlayerSystem {
 
         const skillDetails = this.player.getSkillDetails().join('   :   ');
 
-        this.levelText.text = `Level ${level} Exp ${experience} / ${this.experienceRequired[level]} $ SKILLS: ${skillDetails}`;
+        this.levelText.text = `Level ${level} Exp ${experience} / ${this.experienceRequired[level]} ${this.player.hitpoints}/ SKILLS: ${skillDetails}`;
     }
 
     handleLevelingUp() {
@@ -199,6 +203,12 @@ export class PlayerSystem {
             this.player.level += 1;
             this.gameState.paused = true;
             this.containerMap[CONTAINER_NAMES.SKILL_GUI].visible = true;
+        }
+    }
+
+    checkStatus() {
+        if (this.player.hitpoints <= 0) {
+            this.goToEndScreen();
         }
     }
 }

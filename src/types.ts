@@ -13,6 +13,13 @@ export type GraphicsConfig = {
     height: number
     alpha?: number
 }
+export type SpriteConfig = {
+    position: PointData,
+    width: number,
+    height: number
+    zIndex: number,
+    name: string
+}
 
 export enum SKILL_NAME {
     arrow = 'arrow',

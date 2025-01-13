@@ -47,8 +47,8 @@ export const GameView = () => {
                     }} variant={'contained'}>Show Skill GUI</Button>
 
                     <Button onClick={()=> {
-                        // gameEngine.showLevelGui();
-                    }} variant={'contained'}>Refresh Skills</Button>
+                        gameEngine.showGameOverScreen();
+                    }} variant={'contained'}>Go to End</Button>
                 </Box>
             </Box>
             <div id='gameCanvas'/>

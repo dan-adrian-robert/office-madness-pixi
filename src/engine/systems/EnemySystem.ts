@@ -62,7 +62,6 @@ export class EnemySystem {
                 this.containerMap[CONTAINER_NAMES.WORLD].removeChild(enemy.container);
                 this.enemyList.splice(index, 1);
                 this.player.hitpoints -= 1;
-                console.log(this.player.hitpoints);
             }
         });
     }

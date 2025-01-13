@@ -43,6 +43,10 @@ export class UpgradeSystem {
             const valueNode: any = this.containerMap[skill].getChildByName('VALUE');
             const skillName: SKILL_NAME = this.skillNames[index] as SKILL_NAME;
 
+            if (!textNode) {
+                return
+            }
+
             textNode.text = skillName;
 
             if (skillLevels[skillName]) {

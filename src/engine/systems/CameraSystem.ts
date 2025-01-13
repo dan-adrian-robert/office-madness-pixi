@@ -7,16 +7,16 @@ export class CameraSystem {
     camera: GameCamera;
     containerMap: Record<string, Container> = {};
     keysPressed: Record<string, any> = {};
-    mainApp: PIXI.Application;
+    mainContainer: PIXI.Container;
 
     constructor(
         camera: GameCamera, containerMap: Record<string, Container>,
-        keysPressed: Record<string, any>, mainApp: PIXI.Application,
+        keysPressed: Record<string, any>, mainContainer: PIXI.Container,
     ) {
         this.camera = camera;
         this.containerMap = containerMap;
         this.keysPressed = keysPressed
-        this.mainApp = mainApp;
+        this.mainContainer = mainContainer;
     }
 
     initBGSprite = () => {
@@ -86,14 +86,14 @@ export class CameraSystem {
         if (this.camera.poz.x > 0) {
             this.camera.poz.x = 0;
         }
-        if (this.camera.poz.x < -world.width + this.mainApp.screen.width) {
-            this.camera.poz.x = -world.width + this.mainApp.screen.width;
+        if (this.camera.poz.x < -world.width + this.mainContainer.width) {
+            this.camera.poz.x = -world.width + this.mainContainer.width;
         }
         if (this.camera.poz.y > 0) {
             this.camera.poz.y = 0;
         }
-        if (this.camera.poz.y < -world.height + this.mainApp.screen.height) {
-            this.camera.poz.y = -world.height + this.mainApp.screen.height;
+        if (this.camera.poz.y < -world.height + this.mainContainer.height) {
+            this.camera.poz.y = -world.height + this.mainContainer.height;
         }
 
         world.x = this.camera.poz.x;

@@ -2,6 +2,7 @@ import * as PIXI from "pixi.js";
 import {CANVAS_OPTION} from "./config";
 import {MenuScreen} from "./screens/MenuScreen";
 import {GamePlayScreen} from "./screens/GamePlayScreen";
+import {GameOverScreen} from "./screens/GameOverScreen";
 
 export class GameEngine {
     mainApp: PIXI.Application;
@@ -29,6 +30,11 @@ export class GameEngine {
 
     showGameplayScreen() {
         this.currentScreen.destroy();
-        this.currentScreen = new GamePlayScreen(this.mainApp, this.gameState, () => {});
+        this.currentScreen = new GamePlayScreen(this.mainApp, this.gameState, () => this.showGameOverScreen());
+    }
+
+    showGameOverScreen() {
+        this.currentScreen.destroy();
+        this.currentScreen = new GameOverScreen(this.mainApp, () => {});
     }
 }
