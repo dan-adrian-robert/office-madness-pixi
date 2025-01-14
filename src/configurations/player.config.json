@@ -10,6 +10,21 @@
     "level": 1,
     "firstSkill": "arrow"
   },
+  "animationConfig": {
+    "source": "/assets/mobs/ogre.json",
+    "animationState": "walk_2",
+    "size": 48,
+    "animationSpeed": 0.125,
+    "speed": 1
+  },
+  "spriteConfig": {
+    "position": {
+      "x": 50,
+      "y": 200
+    },
+    "texture": "/assets/player/player.png",
+    "name": "player"
+  },
   "graphicsConfig": {
     "color": "#AF1414",
     "width": 32,

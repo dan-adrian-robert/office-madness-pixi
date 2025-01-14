@@ -1,7 +1,7 @@
+import * as PIXI from "pixi.js";
 import {Container} from "pixi.js";
 import {Player} from "../entities/Player";
 import {CANVAS_OPTION, CONTAINER_NAMES, LAYERS, WORLD_SETTINGS} from "../config";
-import * as PIXI from "pixi.js";
 import {GameCamera} from "../entities/Camera";
 import {Projectile} from "../entities/Projectile";
 import {Enemy} from "../entities/Enemy";
@@ -9,6 +9,7 @@ import * as projectileConfig from "../../configurations/projectile.config.json"
 import {Skill} from "../entities/Skill";
 import * as levelExperience from "../../configurations/level.experience.config.json"
 import {generateRandomSpawnPoint, getEnemiesInRange} from "../utils";
+import {DIRECTION} from "../../types";
 
 export class PlayerSystem {
     containerMap: Record<string, Container>
@@ -90,11 +91,14 @@ export class PlayerSystem {
 
     handleMovement() {
         const speed = this.player.speed;
+        this.player.direction = DIRECTION.IDLE;
 
         if (this.keysPressed["KeyA"]) {
+            this.player.direction = DIRECTION.LEFT;
             this.player.container.position.x -= speed;
         }
         if (this.keysPressed["KeyD"]) {
+            this.player.direction = DIRECTION.RIGHT;
             this.player.container.position.x += speed
         }
         if (this.keysPressed["KeyS"]) {
@@ -138,6 +142,8 @@ export class PlayerSystem {
         if (this.camera.poz.x < -world.width + this.mainContainer.width) {
             this.camera.poz.x = -world.width + this.mainContainer.width
         }
+
+        this.player.changeAnimationSprite();
     }
 
     handleShooting(delta: PIXI.Ticker) {

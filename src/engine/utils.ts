@@ -78,23 +78,23 @@ export const getEnemiesInRange = (enemyList: Array<Enemy>, range: number, poz: P
     });
 }
 
-export const buildButton = (config: GraphicsConfig, spriteConfig: SpriteConfig, textConfig: any) => {
+export const buildButton = (spriteConfig: SpriteConfig, textConfig: any) => {
     const sprite: PIXI.Sprite = new PIXI.Sprite();
 
-    const {position, zIndex, name} = spriteConfig;
+    const {position, zIndex, name, texture} = spriteConfig;
     sprite.position = position
     sprite.label = name;
     sprite.zIndex = zIndex;
+    sprite.texture = PIXI.Assets.cache.get(texture)
 
-    const graphics = buildSquare(config);
-    sprite.addChild(graphics)
-    sprite.cursor = 'crosshair'
+    sprite.cursor = 'pointer'
     sprite.eventMode = 'dynamic';
     sprite.interactive = true;
 
     const {text, style} = textConfig;
 
     const titleText = new PIXI.Text(text, style);
+    titleText.position = textConfig.position;
     sprite.addChild(titleText);
 
     return sprite;

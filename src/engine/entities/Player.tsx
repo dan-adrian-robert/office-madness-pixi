@@ -1,8 +1,9 @@
 import * as PIXI from "pixi.js";
-import {buildContainer, buildSquare, getSkillConfiguration} from "../utils";
+import {AnimatedSprite, Texture} from "pixi.js";
+import {buildContainer, getSkillConfiguration} from "../utils";
 import {PointData} from "pixi.js/lib/maths/point/PointData";
 import {Skill} from "./Skill";
-import {SkillConfig} from "../../types";
+import {DIRECTION, SkillConfig} from "../../types";
 
 export class Player {
     speed: number;
@@ -13,12 +14,26 @@ export class Player {
     experience: number;
     skills: Record<string, Skill>;
 
-    constructor(playerConfig: any) {
-        const {graphicsConfig, containerConfig, metadata} = playerConfig;
+    animations: Record<string, Array<Texture>>;
+    characterSprite: AnimatedSprite;
+    direction: DIRECTION = DIRECTION.RIGHT;
+    lastAnimation: string;
 
-        const rectangle = buildSquare(graphicsConfig);
+    constructor(playerConfig: any) {
+        const { containerConfig, metadata } = playerConfig;
+
+        const config = PIXI.Assets.cache.get("/assets/player/player.json")
+
+        this.animations = config.animations;
+
+        this.lastAnimation = 'idle/tile';
+        this.characterSprite = new PIXI.AnimatedSprite(this.animations['idle/tile']);
+        this.characterSprite.animationSpeed = 0.05;
+        this.characterSprite.setSize(128);
+        this.characterSprite.play();
+
         this.container = buildContainer(containerConfig);
-        this.container.addChild(rectangle)
+        this.container.addChild(this.characterSprite)
 
         const {speed, size, hitpoints, experience, level, firstSkill} = metadata;
 
@@ -75,5 +90,29 @@ export class Player {
         }
 
         return skillDetails;
+    }
+
+    changeAnimationSprite() {
+
+        if (this.direction === DIRECTION.RIGHT && this.lastAnimation !== 'walk_right/tile') {
+            this.lastAnimation = 'walk_right/tile';
+            this.characterSprite.textures = this.animations[this.lastAnimation];
+            this.characterSprite.gotoAndPlay(0);
+            this.characterSprite.animationSpeed = 0.15;
+        }
+
+        if (this.direction === DIRECTION.LEFT && this.lastAnimation !== 'walk_left/tile') {
+            this.lastAnimation = 'walk_left/tile';
+            this.characterSprite.textures = this.animations[this.lastAnimation];
+            this.characterSprite.gotoAndPlay(0);
+            this.characterSprite.animationSpeed = 0.15;
+        }
+
+        if (this.direction === DIRECTION.IDLE && this.lastAnimation !== 'idle/tile') {
+            this.lastAnimation = 'idle/tile';
+            this.characterSprite.textures = this.animations[this.lastAnimation];
+            this.characterSprite.animationSpeed = 0.05;
+            this.characterSprite.gotoAndPlay(0);
+        }
     }
 }

@@ -16,11 +16,11 @@ export class GameEngine {
 
     constructor() {
         this.mainApp = new PIXI.Application();
-        this.currentScreen = new MenuScreen(this.mainApp, () => this.showGameplayScreen());
     }
 
     async initGameCanvas() {
         await this.mainApp.init(CANVAS_OPTION);
+        this.currentScreen = new MenuScreen(this.mainApp, () => this.showGameplayScreen());
         this.mainApp.ticker.maxFPS = 32;
     }
 

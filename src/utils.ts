@@ -1,7 +1,7 @@
 
 import * as PIXI from 'pixi.js'
-import { Container } from "pixi.js";
-import { loadTexture } from "./assetLoaders/loaders";
+import {Assets, Container} from "pixi.js";
+import {loadAsset, loadTexture} from "./assetLoaders/loaders";
 
 export const getContainerByName = (container: PIXI.Container, name: string): PIXI.Container => {
     const result = container.getChildByName(name);
@@ -57,9 +57,17 @@ export const buildContainersStructure = (config: any, name: string) => {
 export const loadAllTextures = async ():Promise<Array<{name: string, texture: any}>> => {
 
     const background =  await loadTexture( '/assets/background/floor_map.png');
+    const button =  await loadTexture( '/assets/ui/button.png');
+
+   const player = await Assets.load([
+        '/assets/player/player.png',
+        '/assets/player/player.json',
+    ]);
 
     return [
         {name: "floorMap", texture: background},
+        {name: "button", texture: button},
+        {name: "player", texture: player},
     ];
 }
 

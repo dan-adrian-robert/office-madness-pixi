@@ -75,7 +75,6 @@ export class GamePlayScreen {
 
 
         this.gameLoopFunction = (delta: PIXI.Ticker)=> {
-            console.log('ticker stuff');
             if(this.gameState.paused) {
                 return;
             }

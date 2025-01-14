@@ -1,39 +1,39 @@
 {
   "buttons": [
     {
-      "graphicsConfig": {
-        "color": "#AF1414",
-        "width": 250,
-        "height": 75
-      },
       "spriteConfig": {
         "position": {
           "x": 50,
           "y": 100
         },
+        "texture": "/assets/ui/button.png",
         "zIndex": 100,
         "name": "startButton"
       },
       "textConfig": {
-        "text": "START"
+        "text": "START",
+        "position": {
+          "x": 35,
+          "y": 15
+        }
       }
     },
     {
-      "graphicsConfig": {
-        "color": "#AFFFAA",
-        "width": 250,
-        "height": 75
-      },
       "spriteConfig": {
         "position": {
           "x": 50,
           "y": 200
         },
+        "texture": "/assets/ui/button.png",
         "zIndex": 100,
         "name": "optionsButton"
       },
       "textConfig": {
-        "text": "OPTION"
+        "text": "OPTION",
+        "position": {
+          "x": 35,
+          "y": 15
+        }
       }
     }
   ]

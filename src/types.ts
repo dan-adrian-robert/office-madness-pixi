@@ -18,7 +18,8 @@ export type SpriteConfig = {
     width: number,
     height: number
     zIndex: number,
-    name: string
+    name: string,
+    texture: string,
 }
 
 export enum SKILL_NAME {
@@ -36,4 +37,10 @@ export enum GAME_STATE {
     MENU = 'MENU',
     GAME_PLAY = 'GAME_PLAY',
     GAME_OVER = 'GAME_OVER',
+}
+
+export enum DIRECTION {
+    RIGHT = 'RIGHT',
+    LEFT = 'LEFT',
+    IDLE = 'IDLE'
 }

@@ -1,10 +1,9 @@
 import {Assets, Texture} from "pixi.js";
-import {ASSET_NAMES, SpriteSheetConfig} from "./types";
 import {getSpriteSheetConfig, getTexture} from "./parser";
 import * as PIXI from "pixi.js";
 
 
-export const loadAsset = async (imagePath:ASSET_NAMES, config:SpriteSheetConfig) => {
+export const loadAsset = async (imagePath: string, config: string) => {
     const result = await Assets.load(imagePath);
 
     const textureMap: Record<any, Texture> = {};

@@ -1,8 +1,9 @@
 import * as PIXI from 'pixi.js';
 import {buildButton, buildSquare} from "../utils";
 import menuConfig from "../../configurations/menu.config.json";
-import {CANVAS_OPTION} from "../config";
+import {CANVAS_OPTION, WORLD_SETTINGS} from "../config";
 import {GraphicsConfig} from "../../types";
+import {Sprite} from "pixi.js";
 
 export class MenuScreen {
     app: PIXI.Application;
@@ -24,15 +25,15 @@ export class MenuScreen {
         this.container.addChild(graph);
 
         menuConfig.buttons.forEach((config, index: number) => {
-            const {graphicsConfig, spriteConfig, textConfig} = config;
-            const sprite = buildButton(graphicsConfig, spriteConfig as any, textConfig);
+            const { spriteConfig, textConfig } = config;
+            const buttonSprite = buildButton(spriteConfig as any, textConfig);
 
             if (index === 0) {
-                sprite.onclick = () => {
+                buttonSprite.onclick = () => {
                     switchScreen();
                 }
             }
-            this.container.addChild(sprite);
+            this.container.addChild(buttonSprite);
         })
         app.stage.addChild(this.container);
     }
