@@ -1,6 +1,5 @@
 import * as PIXI from "pixi.js";
 import {CANVAS_OPTION} from "./config";
-import {MenuScreen} from "./screens/MenuScreen";
 import {GamePlayScreen} from "./screens/GamePlayScreen";
 import {GameOverScreen} from "./screens/GameOverScreen";
 
@@ -20,7 +19,8 @@ export class GameEngine {
 
     async initGameCanvas() {
         await this.mainApp.init(CANVAS_OPTION);
-        this.currentScreen = new MenuScreen(this.mainApp, () => this.showGameplayScreen());
+        // this.currentScreen = new MenuScreen(this.mainApp, () => this.showGameplayScreen());
+        this.currentScreen = new GamePlayScreen(this.mainApp, this.gameState, () => this.showGameOverScreen());
         this.mainApp.ticker.maxFPS = 32;
     }
 

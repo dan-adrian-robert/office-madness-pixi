@@ -73,7 +73,6 @@ export class GamePlayScreen {
         this.playerSystem.initExperienceGuy();
         this.upgradeSystem.init();
 
-
         this.gameLoopFunction = (delta: PIXI.Ticker)=> {
             if(this.gameState.paused) {
                 return;
@@ -82,7 +81,7 @@ export class GamePlayScreen {
             this.cameraSystem.run();
             this.projectileSystem.run();
             this.enemySystem.run();
-            this.spawnSystem.run();
+            // this.spawnSystem.run();
             this.playerSystem.run(delta);
             this.upgradeSystem.run();
         }

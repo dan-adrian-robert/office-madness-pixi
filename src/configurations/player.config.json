@@ -18,17 +18,24 @@
     "speed": 1
   },
   "spriteConfig": {
-    "position": {
-      "x": 50,
-      "y": 200
+    "textureConfig": "/assets/player/player.json",
+    "animationName": "idle/tile",
+    "animationSpeed": 0.125,
+    "size": {
+      "height": 64,
+      "width": 64
     },
-    "texture": "/assets/player/player.png",
+    "animationStateMap": {
+      "LEFT": "walk_left/tile",
+      "RIGHT": "walk_right/tile",
+      "IDLE": "idle/tile"
+    },
+    "animationSpeedMap": {
+      "LEFT": 0.15,
+      "RIGHT": 0.15,
+      "IDLE": 0.05
+    },
     "name": "player"
-  },
-  "graphicsConfig": {
-    "color": "#AF1414",
-    "width": 32,
-    "height": 32
   },
   "containerConfig": {
     "position": {

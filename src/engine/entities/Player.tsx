@@ -1,11 +1,11 @@
 import * as PIXI from "pixi.js";
-import {AnimatedSprite, Texture} from "pixi.js";
 import {buildContainer, getSkillConfiguration} from "../utils";
 import {PointData} from "pixi.js/lib/maths/point/PointData";
 import {Skill} from "./Skill";
 import {DIRECTION, SkillConfig} from "../../types";
+import {AnimatedEntity} from "./AnimatedEntity";
 
-export class Player {
+export class Player extends AnimatedEntity {
     speed: number;
     size: PointData
     container: PIXI.Container;
@@ -14,23 +14,10 @@ export class Player {
     experience: number;
     skills: Record<string, Skill>;
 
-    animations: Record<string, Array<Texture>>;
-    characterSprite: AnimatedSprite;
-    direction: DIRECTION = DIRECTION.RIGHT;
-    lastAnimation: string;
-
     constructor(playerConfig: any) {
-        const { containerConfig, metadata } = playerConfig;
+        const { containerConfig, metadata, spriteConfig } = playerConfig;
 
-        const config = PIXI.Assets.cache.get("/assets/player/player.json")
-
-        this.animations = config.animations;
-
-        this.lastAnimation = 'idle/tile';
-        this.characterSprite = new PIXI.AnimatedSprite(this.animations['idle/tile']);
-        this.characterSprite.animationSpeed = 0.05;
-        this.characterSprite.setSize(128);
-        this.characterSprite.play();
+        super(spriteConfig, DIRECTION.IDLE)
 
         this.container = buildContainer(containerConfig);
         this.container.addChild(this.characterSprite)
@@ -90,29 +77,5 @@ export class Player {
         }
 
         return skillDetails;
-    }
-
-    changeAnimationSprite() {
-
-        if (this.direction === DIRECTION.RIGHT && this.lastAnimation !== 'walk_right/tile') {
-            this.lastAnimation = 'walk_right/tile';
-            this.characterSprite.textures = this.animations[this.lastAnimation];
-            this.characterSprite.gotoAndPlay(0);
-            this.characterSprite.animationSpeed = 0.15;
-        }
-
-        if (this.direction === DIRECTION.LEFT && this.lastAnimation !== 'walk_left/tile') {
-            this.lastAnimation = 'walk_left/tile';
-            this.characterSprite.textures = this.animations[this.lastAnimation];
-            this.characterSprite.gotoAndPlay(0);
-            this.characterSprite.animationSpeed = 0.15;
-        }
-
-        if (this.direction === DIRECTION.IDLE && this.lastAnimation !== 'idle/tile') {
-            this.lastAnimation = 'idle/tile';
-            this.characterSprite.textures = this.animations[this.lastAnimation];
-            this.characterSprite.animationSpeed = 0.05;
-            this.characterSprite.gotoAndPlay(0);
-        }
     }
 }
