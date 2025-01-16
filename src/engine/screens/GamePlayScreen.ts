@@ -81,7 +81,7 @@ export class GamePlayScreen {
             this.cameraSystem.run();
             this.projectileSystem.run();
             this.enemySystem.run();
-            // this.spawnSystem.run();
+            this.spawnSystem.run();
             this.playerSystem.run(delta);
             this.upgradeSystem.run();
         }

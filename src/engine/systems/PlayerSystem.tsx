@@ -139,8 +139,8 @@ export class PlayerSystem {
         if (this.camera.poz.x > 0) {
             this.camera.poz.x = 0;
         }
-        if (this.camera.poz.x < -world.width + this.mainContainer.width) {
-            this.camera.poz.x = -world.width + this.mainContainer.width
+        if (this.camera.poz.x < -world.width + CANVAS_OPTION.width) {
+            this.camera.poz.x = -world.width + CANVAS_OPTION.width
         }
 
         this.player.changeAnimationSprite();

@@ -1,6 +1,6 @@
 import {GameCamera} from "../entities/Camera";
 import {Container, Sprite} from "pixi.js";
-import {CONTAINER_NAMES, WORLD_SETTINGS, ZOOM_SETTINGS} from "../config";
+import {CANVAS_OPTION, CONTAINER_NAMES, WORLD_SETTINGS, ZOOM_SETTINGS} from "../config";
 import * as PIXI from "pixi.js";
 
 export class CameraSystem {
@@ -67,7 +67,6 @@ export class CameraSystem {
     }
 
     handleCameraMovement = () => {
-
         const world: Container = this.containerMap[CONTAINER_NAMES.WORLD];
 
         if (this.keysPressed["ArrowRight"]) {
@@ -86,14 +85,14 @@ export class CameraSystem {
         if (this.camera.poz.x > 0) {
             this.camera.poz.x = 0;
         }
-        if (this.camera.poz.x < -world.width + this.mainContainer.width) {
-            this.camera.poz.x = -world.width + this.mainContainer.width;
+        if (this.camera.poz.x < -world.width + CANVAS_OPTION.width) {
+            this.camera.poz.x = -world.width + CANVAS_OPTION.width;
         }
         if (this.camera.poz.y > 0) {
             this.camera.poz.y = 0;
         }
-        if (this.camera.poz.y < -world.height + this.mainContainer.height) {
-            this.camera.poz.y = -world.height + this.mainContainer.height;
+        if (this.camera.poz.y < -world.height + CANVAS_OPTION.height) {
+            this.camera.poz.y = -world.height + CANVAS_OPTION.height;
         }
 
         world.x = this.camera.poz.x;
