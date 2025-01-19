@@ -1,6 +1,8 @@
 import {Container, Texture} from "pixi.js";
 import * as PIXI from "pixi.js";
 import {CANVAS_OPTION, CONTAINER_NAMES, LAYERS, WORLD_SETTINGS} from "../config";
+import  UIContainer from "../../configurations/ui.config.json";
+import {buildSpriteConfig} from "../utils";
 
 export class ContainerSystem {
     containerMap: Record<string, Container>
@@ -27,29 +29,26 @@ export class ContainerSystem {
         world.interactive = true;
         world.zIndex = LAYERS.WORLD;
 
-        const topBar= new PIXI.Container();
-        topBar.name = CONTAINER_NAMES.TOP_BAR;
-        topBar.eventMode = 'static'
-        topBar.width = CANVAS_OPTION.width;
-        topBar.height = 32
-        topBar.interactive = true;
-        topBar.zIndex = LAYERS.TOP_BAR;
+        const {position, zIndex, name, texture, size} = UIContainer.TOP_BAR.sprite;
+        const sprite = new PIXI.Sprite();
+        sprite.position = position
+        sprite.label = name;
+        sprite.zIndex = zIndex;
+        sprite.texture = PIXI.Assets.cache.get(texture)
+        sprite.setSize(size.width, size.height);
 
-        const rectangle = new PIXI.Graphics();
-        rectangle.beginFill('#292626');
-        rectangle.drawRect(0, 0, CANVAS_OPTION.width, 32);
-        rectangle.endFill();
-        rectangle.interactive = true;
-        rectangle.cursor ='crosshair'
-        rectangle.x = 0;
-        rectangle.y = 0;
+        const result = buildSpriteConfig(UIContainer.TOP_BAR.children)
 
-        topBar.addChild(rectangle);
+        Object.keys(result).forEach(key => {
+            const text = result[key];
+            sprite.addChild(text);
+            this.addContainer(text, key);
+        })
 
         this.mainContainer.addChild(world);
-        this.mainContainer.addChild(topBar);
+        this.mainContainer.addChild(sprite);
         this.addContainer(world, CONTAINER_NAMES.WORLD);
-        this.addContainer(topBar, CONTAINER_NAMES.TOP_BAR);
+        this.addContainer(sprite, CONTAINER_NAMES.TOP_BAR);
 
         this.initSkillGUIContainer();
     }

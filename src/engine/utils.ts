@@ -99,3 +99,19 @@ export const buildButton = (spriteConfig: SpriteConfig, textConfig: any) => {
 
     return sprite;
 }
+
+export const buildSpriteConfig = (list:Array<any>): Record<string, PIXI.Text> => {
+    const result: Record<string, PIXI.Text> = {};
+
+    list.forEach(item => {
+        const {style, text, position, size, name} = item;
+        const textStyle = new PIXI.TextStyle(style);
+        const textContainer = new PIXI.Text(text, textStyle);
+        textContainer.position = position;
+        textContainer.name = name;
+        // textContainer.setSize(size);
+        result[name] = textContainer;
+    })
+
+    return result;
+}

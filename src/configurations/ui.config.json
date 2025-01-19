@@ -1,0 +1,104 @@
+{
+  "TOP_BAR": {
+    "sprite": {
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "size": {
+        "width": 1024,
+        "height": 48
+      },
+      "name": "TOP_BAR",
+      "texture": "/assets/ui/topBar.png",
+      "zIndex": 200
+    },
+    "children": [
+      {
+        "style": {
+          "fontFamily": "Arial",
+          "fontSize": 16,
+          "stroke": "#f0f3e4"
+        },
+        "name": "LEVEL_TEXT",
+        "text": "Level 0",
+        "position": {
+          "x": 10,
+          "y": 10
+        },
+        "size": {
+          "width": 16,
+          "height": 16
+        }
+      },
+      {
+        "style": {
+          "fontFamily": "Arial",
+          "fontSize": 12,
+          "stroke": "#f0f3e4"
+        },
+        "name": "EXPERIENCE_TEXT",
+        "text": "EXP 0/0",
+        "position": {
+          "x": 10,
+          "y": 36
+        },
+        "size": {
+          "width": 64,
+          "height": 16
+        }
+      },
+      {
+        "style": {
+          "fontFamily": "Arial",
+          "fontSize": 12,
+          "stroke": "#f0f3e4"
+        },
+        "name": "SKILL1_TEXT",
+        "text": "Skills1",
+        "position": {
+          "x": 100,
+          "y": 10
+        },
+        "size": {
+          "width": 64,
+          "height": 16
+        }
+      },
+      {
+        "style": {
+          "fontFamily": "Arial",
+          "fontSize": 12,
+          "stroke": "#f0f3e4"
+        },
+        "name": "SKILL2_TEXT",
+        "text": "Skills2",
+        "position": {
+          "x": 300,
+          "y": 10
+        },
+        "size": {
+          "width": 64,
+          "height": 16
+        }
+      },
+      {
+        "style": {
+          "fontFamily": "Arial",
+          "fontSize": 12,
+          "stroke": "#f0f3e4"
+        },
+        "name": "SKILL3_TEXT",
+        "text": "Skills3",
+        "position": {
+          "x": 500,
+          "y": 10
+        },
+        "size": {
+          "width": 64,
+          "height": 16
+        }
+      }
+    ]
+  }
+}

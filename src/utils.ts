@@ -58,6 +58,7 @@ export const loadAllTextures = async ():Promise<Array<{name: string, texture: an
 
     const background =  await loadTexture( '/assets/background/floor_map.png');
     const button =  await loadTexture( '/assets/ui/button.png');
+    const topBar =  await loadTexture( '/assets/ui/topBar.png');
 
    const player = await Assets.load([
         '/assets/player/player.png',
@@ -74,6 +75,7 @@ export const loadAllTextures = async ():Promise<Array<{name: string, texture: an
         {name: "button", texture: button},
         {name: "player", texture: player},
         {name: "zombie", texture: zombie},
+        {name: "topBar", texture: topBar},
     ];
 }
 

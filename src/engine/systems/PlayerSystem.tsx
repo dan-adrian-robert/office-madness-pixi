@@ -12,7 +12,7 @@ import {generateRandomSpawnPoint, getEnemiesInRange} from "../utils";
 import {DIRECTION} from "../../types";
 
 export class PlayerSystem {
-    containerMap: Record<string, Container>
+    containerMap: Record<string, any>
     keysPressed: Record<string, boolean> = {};
     player: Player;
     mainContainer: PIXI.Container;
@@ -196,9 +196,21 @@ export class PlayerSystem {
     renderExperienceGui() {
         const {level, experience} = this.player;
 
-        const skillDetails = this.player.getSkillDetails().join('   :   ');
+        this.containerMap["LEVEL_TEXT"].text = `Level ${level}`;
+        this.containerMap["EXPERIENCE_TEXT"].text = `Exp ${experience} / ${this.experienceRequired[level]}`
 
-        this.levelText.text = `Level ${level} Exp ${experience} / ${this.experienceRequired[level]} ${this.player.hitpoints}/ SKILLS: ${skillDetails}`;
+
+        const skillDetails = this.player.getSkillDetails();
+
+        if (skillDetails[0]) {
+            this.containerMap["SKILL1_TEXT"].text = `${skillDetails[0]}`;
+        }
+        if (skillDetails[1]) {
+            this.containerMap["SKILL2_TEXT"].text = `${skillDetails[1]}`;
+        }
+        if (skillDetails[2]) {
+            this.containerMap["SKILL3_TEXT"].text = `${skillDetails[2]}`;
+        }
     }
 
     handleLevelingUp() {
