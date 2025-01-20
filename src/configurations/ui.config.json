@@ -100,5 +100,171 @@
         }
       }
     ]
+  },
+  "SKILL_GUI": {
+    "background": {
+      "name": "SKILL_GUI",
+      "eventMode": "static",
+      "size": {
+        "width": 512,
+        "height": 264
+      },
+      "zIndex": 300,
+      "position": {
+        "x": 256,
+        "y": 252
+      },
+      "visible": true,
+      "texture": "/assets/ui/upgrade_bg.png"
+    },
+    "children": [
+      {
+        "name": "SKILL_1",
+        "position": {
+          "x": 32,
+          "y": 32
+        },
+        "size": {
+          "width": 128,
+          "height": 200
+        },
+        "eventMode": "static",
+        "cursor": "pointer",
+        "zIndex": 300,
+        "texture": "/assets/ui/skill_card.png",
+        "content": {
+          "title": {
+            "position": {
+              "x": 5,
+              "y": 25
+            },
+            "text": "TBD",
+            "style": {
+              "fontFamily": "Arial",
+              "fontSize": 20,
+              "fill": "0xffffff",
+              "wordWrap": true,
+              "wordWrapWidth": 128,
+              "align": "center"
+            },
+            "name": "TITLE"
+          },
+          "level": {
+            "name": "LEVEL",
+            "position": {
+              "x": 55,
+              "y": 100
+            },
+            "text": "TBD",
+            "style": {
+              "fontFamily": "Arial",
+              "fontSize": 14,
+              "fill": "0xffffff",
+              "wordWrap": true,
+              "wordWrapWidth": 128,
+              "align": "center"
+            }
+          }
+        }
+      },
+      {
+        "name": "SKILL_2",
+        "position": {
+          "x": 196,
+          "y": 32
+        },
+        "size": {
+          "width": 128,
+          "height": 200
+        },
+        "eventMode": "static",
+        "cursor": "pointer",
+        "zIndex": 300,
+        "texture": "/assets/ui/skill_card.png",
+        "content": {
+          "title": {
+            "position": {
+              "x": 5,
+              "y": 25
+            },
+            "text": "TBD",
+            "style": {
+              "fontFamily": "Arial",
+              "fontSize": 20,
+              "fill": "0xffffff",
+              "wordWrap": true,
+              "wordWrapWidth": 128,
+              "align": "center"
+            },
+            "name": "TITLE"
+          },
+          "level": {
+            "name": "LEVEL",
+            "position": {
+              "x": 55,
+              "y": 100
+            },
+            "text": "TBD",
+            "style": {
+              "fontFamily": "Arial",
+              "fontSize": 14,
+              "fill": "0xffffff",
+              "wordWrap": true,
+              "wordWrapWidth": 128,
+              "align": "center"
+            }
+          }
+        }
+      },
+      {
+        "name": "SKILL_3",
+        "position": {
+          "x": 352,
+          "y": 32
+        },
+        "size": {
+          "width": 128,
+          "height": 200
+        },
+        "eventMode": "static",
+        "cursor": "pointer",
+        "zIndex": 300,
+        "texture": "/assets/ui/skill_card.png",
+        "content": {
+          "title": {
+            "position": {
+              "x": 5,
+              "y": 25
+            },
+            "text": "TBD",
+            "style": {
+              "fontFamily": "Arial",
+              "fontSize": 20,
+              "fill": "0xffffff",
+              "wordWrap": true,
+              "wordWrapWidth": 128,
+              "align": "center"
+            },
+            "name": "TITLE"
+          },
+          "level": {
+            "name": "LEVEL",
+            "position": {
+              "x": 55,
+              "y": 100
+            },
+            "text": "TBD",
+            "style": {
+              "fontFamily": "Arial",
+              "fontSize": 14,
+              "fill": "0xffffff",
+              "wordWrap": true,
+              "wordWrapWidth": 128,
+              "align": "center"
+            }
+          }
+        }
+      }
+    ]
   }
 }

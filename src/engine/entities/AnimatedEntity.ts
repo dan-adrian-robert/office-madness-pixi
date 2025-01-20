@@ -20,8 +20,6 @@ export class AnimatedEntity {
 
         const config = PIXI.Assets.cache.get(textureConfig);
 
-        console.log('config', config);
-
         this.animationStateMap = animationStateMap;
         this.animationSpeedMap = animationSpeedMap;
         this.animations = config.animations;

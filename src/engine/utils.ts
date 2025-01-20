@@ -115,3 +115,63 @@ export const buildSpriteConfig = (list:Array<any>): Record<string, PIXI.Text> =>
 
     return result;
 }
+
+export const buildUpgradePopup = (config: any): Record<string, Container>=> {
+    const { background, children } = config;
+    const { name, eventMode, size,zIndex, position, visible, texture } = background;
+
+    const skillGUI= new PIXI.Sprite();
+    skillGUI.label = name;
+    skillGUI.eventMode = eventMode;
+    skillGUI.width = size.width;
+    skillGUI.height = size.height;
+    skillGUI.zIndex = zIndex;
+    skillGUI.position = position;
+    skillGUI.visible = visible;
+    skillGUI.texture = PIXI.Assets.cache.get(texture)
+
+    const result: Record<string, Container> = {};
+
+    children.forEach((childConfig: any) => {
+        const container = createSkillGuiItem(childConfig);
+        skillGUI.addChild(container);
+        result[container.label] = container;
+    })
+
+    result[name] = skillGUI;
+
+    return result;
+}
+
+export const createSkillGuiItem = (config: any): PIXI.Container => {
+    const {name, eventMode, size, cursor, zIndex, position, texture, content} = config;
+
+    const skillContainer= new PIXI.Sprite();
+    skillContainer.name = name;
+    skillContainer.eventMode = eventMode
+    skillContainer.width = size.width;
+    skillContainer.height = size.height;
+    skillContainer.cursor = cursor;
+    skillContainer.zIndex = zIndex;
+    skillContainer.position = position;
+    skillContainer.texture = PIXI.Assets.cache.get(texture);
+
+    const {title, level} = content;
+
+    const titleText = buildPixiText(title);
+    const levelText = buildPixiText(level);
+
+    skillContainer.addChild(titleText);
+    skillContainer.addChild(levelText);
+    return skillContainer;
+}
+
+export const buildPixiText = (textConfig: any): PIXI.Text => {
+    const {style, text, position, name} = textConfig;
+    const titleStyle = new PIXI.TextStyle(style);
+    const textObj = new PIXI.Text(text, titleStyle);
+    textObj.position = position
+    textObj.label = name;
+
+    return textObj;
+}

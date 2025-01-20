@@ -40,7 +40,7 @@ export class UpgradeSystem {
 
         [CONTAINER_NAMES.SKILL_1, CONTAINER_NAMES.SKILL_2, CONTAINER_NAMES.SKILL_3].forEach((skill, index) => {
             const textNode: any = this.containerMap[skill].getChildByName('TITLE');
-            const valueNode: any = this.containerMap[skill].getChildByName('VALUE');
+            const valueNode: any = this.containerMap[skill].getChildByName('LEVEL');
             const skillName: SKILL_NAME = this.skillNames[index] as SKILL_NAME;
 
             if (!textNode) {

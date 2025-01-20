@@ -12,10 +12,7 @@ export class GameSettingsSystem {
     }
 
     cleanup() {
-        console.log('cleanup');
-        console.log('cleanup', this.currentScreen);
         if (this.currentScreen) {
-            console.log('destroy')
             this.currentScreen.destroy();
         }
     }
