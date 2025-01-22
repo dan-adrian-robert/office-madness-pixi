@@ -1,0 +1,38 @@
+{
+  "ARROW": {
+    "texturePath": "/assets/skills/skill_icons.json",
+    "textureName": "skill_icon_04",
+    "position": {
+      "x": 5,
+      "y": 5
+    },
+    "size": {
+      "width": 24,
+      "height": 24
+    }
+  },
+  "FIRE": {
+    "texturePath": "/assets/skills/skill_icons.json",
+    "textureName": "skill_icon_07",
+    "position": {
+      "x": 5,
+      "y": 5
+    },
+    "size": {
+      "width": 24,
+      "height": 24
+    }
+  },
+  "ICE": {
+    "texturePath": "/assets/skills/skill_icons.json",
+    "textureName": "skill_icon_11",
+    "position": {
+      "x": 5,
+      "y": 5
+    },
+    "size": {
+      "width": 24,
+      "height": 24
+    }
+  }
+}

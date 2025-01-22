@@ -72,6 +72,10 @@ export const loadAllTextures = async ():Promise<Array<{name: string, texture: an
         '/assets/mobs/zombie.json',
     ]);
 
+    const skillIcons = await PIXI.Assets.load([
+        '/assets/skills/skill_icons.json'
+    ]);
+
     return [
         {name: "floorMap", texture: background},
         {name: "button", texture: button},
@@ -80,6 +84,7 @@ export const loadAllTextures = async ():Promise<Array<{name: string, texture: an
         {name: "topBar", texture: topBar},
         {name: "skillCard", texture: skillCard},
         {name: "upgradeBg", texture: upgradeBg},
+        {name: "skillsIcons", texture: skillIcons},
     ];
 }
 

@@ -1,9 +1,8 @@
 import * as PIXI from 'pixi.js';
 import {buildButton, buildSquare} from "../utils";
 import menuConfig from "../../configurations/menu.config.json";
-import {CANVAS_OPTION, WORLD_SETTINGS} from "../config";
+import {CANVAS_OPTION} from "../config";
 import {GraphicsConfig} from "../../types";
-import {Sprite} from "pixi.js";
 
 export class MenuScreen {
     app: PIXI.Application;

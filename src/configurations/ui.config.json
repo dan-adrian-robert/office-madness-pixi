@@ -164,6 +164,9 @@
               "wordWrapWidth": 128,
               "align": "center"
             }
+          },
+          "icon": {
+            "skillType": "ARROW"
           }
         }
       },
@@ -213,6 +216,9 @@
               "wordWrapWidth": 128,
               "align": "center"
             }
+          },
+          "icon": {
+            "skillType": "FIRE"
           }
         }
       },
@@ -262,6 +268,9 @@
               "wordWrapWidth": 128,
               "align": "center"
             }
+          },
+          "icon": {
+            "skillType": "ICE"
           }
         }
       }
