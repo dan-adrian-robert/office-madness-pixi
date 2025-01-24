@@ -7,10 +7,12 @@ export class Skill {
     damage: number;
     level: number;
     range: number;
-    color: string;
+    icon: {
+        icon: string
+    };
 
     constructor(config: any) {
-        const {tickInterval, type, damage, color} = config;
+        const {tickInterval, type, damage, icon} = config;
 
         this.tickInterval = tickInterval;
         this.lastTick = 0;
@@ -18,7 +20,7 @@ export class Skill {
         this.range = 250;
         this.type = type;
         this.damage = damage;
-        this.color = color;
+        this.icon = icon;
     }
 
     upgrade(skillConfig: SkillConfig): void {

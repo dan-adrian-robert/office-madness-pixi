@@ -38,17 +38,17 @@ export const buildSquare = (config: GraphicsConfig): Graphics => {
 }
 
 export const getSkillConfiguration = (skillType: 'arrow' | 'fireBolt' | 'iceBolt') => {
-    const config = SKILL_CONFIG[skillType];
-    const {tickInterval, damage} = config[1];
 
-    const randomSkills = ["#E15757FF", "#54BF79FF", "#7B53E4FF"]
-    const color = randomSkills[Math.floor(Math.random() * randomSkills.length)];
+    const {levels, metadata} = SKILL_CONFIG;
+    const config = levels[skillType];
+    const {tickInterval, damage} = config[1];
+    const icon = metadata[skillType];
 
     return {
         tickInterval,
         type: skillType,
         damage,
-        color,
+        icon
     }
 }
 

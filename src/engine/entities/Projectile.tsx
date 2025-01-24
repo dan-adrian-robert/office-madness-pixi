@@ -1,6 +1,6 @@
 import * as PIXI from "pixi.js";
 import type {PointData} from "pixi.js/lib/maths/point/PointData";
-import {buildContainer, buildSquare} from "../utils";
+import {buildContainer, buildSpriteIcon} from "../utils";
 
 export class Projectile {
     speed: number;
@@ -9,13 +9,15 @@ export class Projectile {
     container: PIXI.Container;
     damage: number
 
-    constructor(position: PointData, target: PointData, config: any, color: string) {
-        const {graphicsConfig, containerConfig, metadata} = config;
+    constructor(position: PointData, target: PointData, config: any, iconConfig: any) {
+        const {containerConfig, metadata} = config;
 
-        const rectangle = buildSquare({...graphicsConfig, color});
+        const bulletSprite = buildSpriteIcon({skillType: iconConfig});
+
+        // TBD add texture and config
         this.container = buildContainer(containerConfig);
         this.container.position = position;
-        this.container.addChild(rectangle)
+        this.container.addChild(bulletSprite)
 
         this.target = target;
 

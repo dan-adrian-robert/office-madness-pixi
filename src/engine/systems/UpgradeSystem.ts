@@ -20,7 +20,7 @@ export class UpgradeSystem {
         this.containerMap = containerMap;
         this.player = player;
         this.gameState = gameState;
-        this.skillConfiguration = SKILL_LEVEL_CONFIG;
+        this.skillConfiguration = SKILL_LEVEL_CONFIG.levels;
         this.skillNames = Object.keys(this.skillConfiguration);
     }
     init() {

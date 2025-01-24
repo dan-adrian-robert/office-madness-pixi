@@ -70,7 +70,6 @@ export class GamePlayScreen {
         this.cameraSystem.initCameraEventListeners();
         this.cameraSystem.initBGSprite();
         this.playerSystem.init();
-        // this.playerSystem.initExperienceGuy();
         this.upgradeSystem.init();
 
         this.gameLoopFunction = (delta: PIXI.Ticker)=> {

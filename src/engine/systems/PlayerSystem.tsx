@@ -10,6 +10,7 @@ import {Skill} from "../entities/Skill";
 import * as levelExperience from "../../configurations/level.experience.config.json"
 import {generateRandomSpawnPoint, getEnemiesInRange} from "../utils";
 import {DIRECTION} from "../../types";
+import * as SKILL_ICONS from '../../configurations/skill.icons.config.json';
 
 export class PlayerSystem {
     containerMap: Record<string, any>
@@ -149,24 +150,24 @@ export class PlayerSystem {
     handleShooting(delta: PIXI.Ticker) {
 
         for (const skillName in this.player.skills) {
-            const {tickInterval, lastTick, range, color} = this.player.skills[skillName];
+            const {tickInterval, lastTick, range, icon} = this.player.skills[skillName];
 
             if (lastTick + tickInterval < delta.lastTime) {
                 const enemiesInRange = getEnemiesInRange(this.enemyList, range ,this.player.getPosition())
                 if(enemiesInRange.length > 0) {
                     this.player.skills[skillName].lastTick = delta.lastTime;
-                    this.createBullet(this.player.skills[skillName], color);
+                    this.createBullet(this.player.skills[skillName], icon);
                 }
             }
         }
     }
 
-    createBullet(skill: Skill, color: string) {
+    createBullet(skill: Skill, iconConfig: any) {
         const enemiesInRange = getEnemiesInRange(this.enemyList, skill.range, this.player.getPosition());
 
         const target = enemiesInRange[0] ? enemiesInRange[0].container.position : generateRandomSpawnPoint();
 
-        const bullet = new Projectile(this.player.getPosition(), target, projectileConfig, color);
+        const bullet = new Projectile(this.player.getPosition(), target, projectileConfig, iconConfig.icon);
         this.projectileList.push(bullet);
         this.containerMap[CONTAINER_NAMES.WORLD].addChild(bullet.container);
     }
