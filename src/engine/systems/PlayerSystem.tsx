@@ -148,13 +148,17 @@ export class PlayerSystem {
     }
 
     handleShooting(delta: PIXI.Ticker) {
-
         for (const skillName in this.player.skills) {
             const {tickInterval, lastTick, range, icon} = this.player.skills[skillName];
 
+            this.player.skills[skillName].tickNow = delta.lastTime;
+
             if (lastTick + tickInterval < delta.lastTime) {
-                const enemiesInRange = getEnemiesInRange(this.enemyList, range ,this.player.getPosition())
+                const enemiesInRange = getEnemiesInRange(this.enemyList, range, this.player.getPosition())
                 if(enemiesInRange.length > 0) {
+                    this.player.skills[skillName].lastTick = delta.lastTime;
+                    this.createBullet(this.player.skills[skillName], icon);
+                } else {
                     this.player.skills[skillName].lastTick = delta.lastTime;
                     this.createBullet(this.player.skills[skillName], icon);
                 }
@@ -177,7 +181,6 @@ export class PlayerSystem {
 
         this.containerMap["LEVEL_TEXT"].text = `Level ${level}`;
         this.containerMap["EXPERIENCE_TEXT"].text = `Exp ${experience} / ${this.experienceRequired[level]}`
-
 
         const skillDetails = this.player.getSkillDetails();
 

@@ -105,7 +105,7 @@ export const buildSpriteConfig = (list:Array<any>): Record<string, PIXI.Text> =>
     const result: Record<string, PIXI.Text> = {};
 
     list.forEach(item => {
-        const {style, text, position, size, name} = item;
+        const {style, text, position, name} = item;
         const textStyle = new PIXI.TextStyle(style);
         const textContainer = new PIXI.Text(text, textStyle);
         textContainer.position = position;

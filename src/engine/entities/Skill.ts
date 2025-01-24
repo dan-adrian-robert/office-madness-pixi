@@ -1,6 +1,7 @@
 import {SkillConfig} from "../../types";
 
 export class Skill {
+    tickNow: number = 0;
     tickInterval: number;
     lastTick: number;
     type: string;

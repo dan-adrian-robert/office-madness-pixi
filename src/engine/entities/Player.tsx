@@ -71,9 +71,10 @@ export class Player extends AnimatedEntity {
 
         for (let skillName in this.skills) {
             const skill = this.skills[skillName];
-            const {type, level, damage, tickInterval} = skill;
+            const {type, level, damage, tickInterval, lastTick, tickNow} = skill;
 
-            skillDetails.push(`${type} - Lvl ${level} dmg:${damage} as:${tickInterval}`);
+            const bulletLoading = ((tickNow-lastTick) / tickInterval) * 100;
+            skillDetails.push(`${type} - Lvl ${level} dmg:${damage} as:${tickInterval} tick: / ${bulletLoading.toFixed(0)}% `);
         }
 
         return skillDetails;
