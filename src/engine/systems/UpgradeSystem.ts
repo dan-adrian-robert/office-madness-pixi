@@ -3,6 +3,7 @@ import {Player} from "../entities/Player";
 import SKILL_LEVEL_CONFIG from '../../configurations/skill.levels.json'
 import {CONTAINER_NAMES} from "../config";
 import {SKILL_NAME, SkillConfig} from "../../types";
+import SKILL_LEVELS from '../../configurations/skill.levels.json';
 
 export class UpgradeSystem {
     player: Player;
@@ -10,7 +11,6 @@ export class UpgradeSystem {
     gameState: any;
     skillConfiguration: Record<SKILL_NAME, Record<number, SkillConfig>>
     skillNames: Array<string>
-
 
     constructor(
         containerMap: Record<string, Container> = {},
@@ -27,7 +27,8 @@ export class UpgradeSystem {
         [CONTAINER_NAMES.SKILL_1, CONTAINER_NAMES.SKILL_2, CONTAINER_NAMES.SKILL_3].forEach((skill, index) => {
             const skillName: SKILL_NAME = this.skillNames[index] as SKILL_NAME;
             this.containerMap[skill].addEventListener('pointerdown', ()=> {
-                this.player.upgrade(skillName, this.skillConfiguration[skillName]);
+                const iconConfig = SKILL_LEVELS['metadata'][skillName]
+                this.player.upgrade(skillName, this.skillConfiguration[skillName], iconConfig);
                 this.containerMap[CONTAINER_NAMES.SKILL_GUI].visible = false;
                 this.gameState.paused = false;
             })

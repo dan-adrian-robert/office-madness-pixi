@@ -172,28 +172,6 @@ export class PlayerSystem {
         this.containerMap[CONTAINER_NAMES.WORLD].addChild(bullet.container);
     }
 
-    initExperienceGuy() {
-        const style = new PIXI.TextStyle({
-            fontFamily: 'Arial',
-            fontSize: 14,
-            stroke: '#f0f3e4',
-        });
-
-        const {level, experience} = this.player;
-
-        this.levelText = new PIXI.Text(`Level ${level} Exp ${experience} / ${this.experienceRequired[level + 1]}`, style);
-
-        const textContainer = new Container();
-        textContainer.width = 64;
-        textContainer.height = 64;
-        textContainer.addChild(this.levelText);
-
-        textContainer.position.y = 15
-        textContainer.position.x = 15
-
-        this.containerMap[CONTAINER_NAMES.TOP_BAR].addChild(textContainer);
-    }
-
     renderExperienceGui() {
         const {level, experience} = this.player;
 

@@ -14,6 +14,11 @@ export class Projectile {
 
         const bulletSprite = buildSpriteIcon({skillType: iconConfig});
 
+        const px = position.x - (target.x + 16);
+        const py = position.y - (target.y - 16);
+
+        bulletSprite.rotation = Math.atan2(py, px) + Math.PI/2;
+
         // TBD add texture and config
         this.container = buildContainer(containerConfig);
         this.container.position = position;

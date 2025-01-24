@@ -53,12 +53,12 @@ export class Player extends AnimatedEntity {
         return output;
     }
 
-    upgrade(skillName: string, levels: Record<number,SkillConfig>) {
+    upgrade(skillName: string, levels: Record<number,SkillConfig>, icon: any) {
 
         const hasSkill = !!this.skills[skillName];
 
         if (!hasSkill) {
-            this.skills[skillName] = new Skill({...levels[1], type: skillName});
+            this.skills[skillName] = new Skill({...levels[1], type: skillName, icon});
         } else {
             const {level} = this.skills[skillName];
             const skillConfig = levels[level + 1];
