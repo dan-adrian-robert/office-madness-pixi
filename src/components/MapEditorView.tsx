@@ -43,8 +43,8 @@ export const GameView = () => {
                     }} variant={'contained'}>Pause</Button>
 
                     <Button onClick={()=> {
-                        // gameEngine.showLevelGui();
-                    }} variant={'contained'}>Show Skill GUI</Button>
+                        gameEngine.addLevels();
+                    }} variant={'contained'}>Add 50 exp</Button>
 
                     <Button onClick={()=> {
                         gameEngine.showGameOverScreen();

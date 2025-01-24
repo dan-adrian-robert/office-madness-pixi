@@ -38,4 +38,12 @@ export class GameEngine {
         this.currentScreen.destroy();
         this.currentScreen = new GameOverScreen(this.mainApp, () => {});
     }
+
+    addLevels() {
+        if(!this.currentScreen || this.currentScreen.screenType !== 'GamePlayScreen') {
+            return
+        }
+
+        this.currentScreen.addPlayerLevel();
+    }
 }

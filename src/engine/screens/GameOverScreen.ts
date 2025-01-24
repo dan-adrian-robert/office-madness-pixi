@@ -3,6 +3,7 @@ import {buildSquare} from "../utils";
 import {GraphicsConfig} from "../../types";
 
 export class GameOverScreen {
+    screenType: string = 'GameOverScreen';
     app: PIXI.Application;
     container: PIXI.Container;
 

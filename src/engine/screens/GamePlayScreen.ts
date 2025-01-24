@@ -15,6 +15,7 @@ import {Enemy} from "../entities/Enemy";
 import {Projectile} from "../entities/Projectile";
 
 export class GamePlayScreen {
+    screenType: string = 'GamePlayScreen';
     app: PIXI.Application;
     mainContainer: PIXI.Container;
 
@@ -91,5 +92,9 @@ export class GamePlayScreen {
     destroy() {
         this.app.ticker.remove(this.gameLoopFunction);
         this.mainContainer.destroy({ children: true });
+    }
+
+    addPlayerLevel() {
+        this.player.experience += 50;
     }
 }

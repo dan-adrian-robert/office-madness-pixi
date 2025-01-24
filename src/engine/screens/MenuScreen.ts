@@ -5,6 +5,7 @@ import {CANVAS_OPTION} from "../config";
 import {GraphicsConfig} from "../../types";
 
 export class MenuScreen {
+    screenType: string = 'MenuScreen';
     app: PIXI.Application;
     container: PIXI.Container;
 
