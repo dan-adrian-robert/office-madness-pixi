@@ -1,6 +1,7 @@
 import * as PIXI from "pixi.js";
 import {AnimatedSprite, Texture} from "pixi.js";
 import {DIRECTION} from "../../types";
+import {PlayerSpriteConfigPayload} from "../types/types";
 
 export class AnimatedEntity {
     animations: Record<string, Array<Texture>>;
@@ -10,13 +11,13 @@ export class AnimatedEntity {
     animationStateMap: Record<DIRECTION, string>;
     animationSpeedMap: Record<DIRECTION, number>;
 
-    constructor(animateConfig: any, direction: DIRECTION) {
+    constructor(spriteConfigPayload: PlayerSpriteConfigPayload, direction: DIRECTION) {
         this.direction = direction;
 
         const {
             textureConfig, animationName, animationSpeed,
             size, animationStateMap, animationSpeedMap
-        } = animateConfig;
+        } = spriteConfigPayload;
 
         const config = PIXI.Assets.cache.get(textureConfig);
 

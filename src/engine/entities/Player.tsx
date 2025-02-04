@@ -77,7 +77,7 @@ export class Player extends AnimatedEntity {
     }
 
     getSkillDetails(): Array<string> {
-        const skillDetails: any = [];
+        const skillDetails: Array<string> = [];
 
         for (let skillName in this.skills) {
             const skill = this.skills[skillName];

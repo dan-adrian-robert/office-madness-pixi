@@ -1,5 +1,5 @@
 import {PointData} from "pixi.js/lib/maths/point/PointData";
-import {BuildContainerConfig} from "../../types";
+import {BuildContainerConfig, DIRECTION} from "../../types";
 
 export type SkillPayload = {
     tickInterval: number,
@@ -16,6 +16,26 @@ export type SkillUpgradePayload = {
     level: number,
     range: number,
 }
+export type AnimatedConfigPayload = {
+    source: string
+    animationState: string,
+    size: number,
+    animationSpeed: number,
+    speed: number
+}
+
+export type PlayerSpriteConfigPayload =  {
+    "textureConfig": string,
+    "animationName": string,
+    "animationSpeed": number,
+    "size": {
+        "height": number,
+        "width": number
+    },
+    "animationStateMap": Record<DIRECTION, string>
+    "animationSpeedMap": Record<DIRECTION, number>
+    "name": string
+};
 
 export type PlayerConstructorPayload = {
     containerConfig: BuildContainerConfig
@@ -27,31 +47,7 @@ export type PlayerConstructorPayload = {
         level: number,
         firstSkill: string,
     },
-    spriteConfig: {
-        "textureConfig": string,
-        "animationName": string,
-        "animationSpeed": number,
-        "size": {
-            "height": number,
-            "width": number
-        },
-        "animationStateMap": {
-            "LEFT": string,
-            "RIGHT": string,
-            "IDLE": string,
-        },
-        "animationSpeedMap": {
-            "LEFT": number,
-            "RIGHT": number,
-            "IDLE": number,
-        },
-        "name": string
-    }
-    animationConfig: {
-        source: string
-        animationState: string,
-        size: number,
-        animationSpeed: number,
-        speed: number
-    }
+    spriteConfig: PlayerSpriteConfigPayload
+    animationConfig: AnimatedConfigPayload,
 }
+

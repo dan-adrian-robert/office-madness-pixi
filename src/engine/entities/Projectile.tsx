@@ -20,7 +20,6 @@ export class Projectile {
 
         bulletSprite.rotation = Math.atan2(py, px) + Math.PI/2;
 
-        // TBD add texture and config
         this.container = buildContainer(containerConfig);
         this.container.position = position;
         this.container.addChild(bulletSprite)
