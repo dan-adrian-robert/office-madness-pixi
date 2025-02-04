@@ -43,6 +43,8 @@
       "y": 412
     },
     "zIndex": 200,
-    "name": "player"
+    "name": "player",
+    "width": 64,
+    "height": 64
   }
 }

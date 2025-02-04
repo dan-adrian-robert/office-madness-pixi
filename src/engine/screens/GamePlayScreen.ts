@@ -10,9 +10,10 @@ import {ProjectileSystem} from "../systems/ProjectileSystem";
 import {UpgradeSystem} from "../systems/UpgradeSystem";
 import {Container, Texture} from "pixi.js";
 import {Player} from "../entities/Player";
-import * as playerConfig from "../../configurations/player.config.json";
+import playerConfig from "../../configurations/player/player.config.json";
 import {Enemy} from "../entities/Enemy";
 import {Projectile} from "../entities/Projectile";
+import skillLevelConfig from '../../configurations/skills/skill.levels.json'
 
 export class GamePlayScreen {
     screenType: string = 'GamePlayScreen';
@@ -60,7 +61,15 @@ export class GamePlayScreen {
         this.enemySystem = new EnemySystem(this.enemyList, this.player, this.containerMap);
         this.spawnSystem = new SpawnSystem(this.enemyList, this.containerMap);
         this.projectileSystem = new ProjectileSystem(this.projectileList, this.enemyList, this.containerMap, this.player);
-        this.upgradeSystem = new UpgradeSystem(this.containerMap, this.player, this.gameState);
+
+        const levelConfig = skillLevelConfig.levels;
+
+        this.upgradeSystem = new UpgradeSystem(
+            this.containerMap,
+            this.player,
+            this.gameState,
+            levelConfig,
+        );
 
         this.initSystems();
     }

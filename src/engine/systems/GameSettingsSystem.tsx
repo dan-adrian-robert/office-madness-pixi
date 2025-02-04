@@ -19,7 +19,6 @@ export class GameSettingsSystem {
 
     startGame(): void {
         this.cleanup();
-        console.log('start game in system')
         // this.currentScreen = new GamePlayScreen(this.app);
     }
 }

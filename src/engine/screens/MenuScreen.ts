@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import {buildButton, buildSquare} from "../utils";
-import menuConfig from "../../configurations/menu.config.json";
+import menuConfig from "../../configurations/ui/menu.config.json";
 import {CANVAS_OPTION} from "../config";
 import {GraphicsConfig} from "../../types";
 

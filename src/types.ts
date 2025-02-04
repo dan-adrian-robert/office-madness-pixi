@@ -30,7 +30,8 @@ export enum SKILL_NAME {
 
 export type SkillConfig = {
     tickInterval: number,
-    damage: number
+    level: number,
+    range: number
 }
 
 export enum GAME_STATE {

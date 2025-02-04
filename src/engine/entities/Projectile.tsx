@@ -1,6 +1,7 @@
 import * as PIXI from "pixi.js";
 import type {PointData} from "pixi.js/lib/maths/point/PointData";
-import {buildContainer, buildSpriteIcon} from "../utils";
+import {buildContainer} from "../utils";
+import {buildSpriteIcon} from "../../configurations/skills/upgrade.popup.builder";
 
 export class Projectile {
     speed: number;

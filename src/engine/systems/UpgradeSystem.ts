@@ -1,9 +1,8 @@
 import {Container} from "pixi.js";
 import {Player} from "../entities/Player";
-import SKILL_LEVEL_CONFIG from '../../configurations/skill.levels.json'
 import {CONTAINER_NAMES} from "../config";
 import {SKILL_NAME, SkillConfig} from "../../types";
-import SKILL_LEVELS from '../../configurations/skill.levels.json';
+import SKILL_LEVELS from '../../configurations/skills/skill.levels.json';
 
 export class UpgradeSystem {
     player: Player;
@@ -16,11 +15,12 @@ export class UpgradeSystem {
         containerMap: Record<string, Container> = {},
         player: Player,
         gameState: any,
+        skillConfiguration: Record<SKILL_NAME, Record<number, SkillConfig>>
     ) {
         this.containerMap = containerMap;
         this.player = player;
         this.gameState = gameState;
-        this.skillConfiguration = SKILL_LEVEL_CONFIG.levels;
+        this.skillConfiguration = skillConfiguration;
         this.skillNames = Object.keys(this.skillConfiguration);
     }
     init() {

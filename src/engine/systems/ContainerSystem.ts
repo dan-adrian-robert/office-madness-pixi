@@ -1,8 +1,9 @@
 import {Container, Texture} from "pixi.js";
 import * as PIXI from "pixi.js";
 import {CONTAINER_NAMES, LAYERS, WORLD_SETTINGS} from "../config";
-import  UIContainer from "../../configurations/ui.config.json";
-import {buildSpriteConfig, buildUpgradePopup} from "../utils";
+import  UIContainer from "../../configurations/ui/ui.config.json";
+import {buildSpriteConfig} from "../utils";
+import {buildUpgradePopup} from "../../configurations/skills/upgrade.popup.builder";
 
 export class ContainerSystem {
     containerMap: Record<string, Container>

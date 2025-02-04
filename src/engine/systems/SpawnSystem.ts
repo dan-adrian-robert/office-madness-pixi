@@ -1,7 +1,7 @@
 import {Enemy} from "../entities/Enemy";
 import {Container} from "pixi.js";
 import {CONTAINER_NAMES} from "../config";
-import * as enemyConfig from '../../configurations/enemy.config.json';
+import * as enemyConfig from '../../configurations/enemy/enemy.config.json';
 import {generateRandomSpawnPoint} from "../utils";
 
 export class SpawnSystem {

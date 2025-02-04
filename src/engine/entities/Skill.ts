@@ -1,34 +1,33 @@
-import {SkillConfig} from "../../types";
+import {SkillPayload, SkillUpgradePayload} from "../types/types";
 
 export class Skill {
-    tickNow: number = 0;
+    tickNow: number;
     tickInterval: number;
     lastTick: number;
     type: string;
-    damage: number;
     level: number;
     range: number;
     icon: {
         icon: string
     };
 
-    constructor(config: any) {
-        const {tickInterval, type, damage, icon} = config;
+    constructor(config: SkillPayload) {
+        const {tickInterval, type, icon, level, range} = config;
+        this.lastTick = 0;
+        this.tickNow = 0;
 
         this.tickInterval = tickInterval;
-        this.lastTick = 0;
-        this.level = 1;
-        this.range = 250;
+        this.range = range;
+        this.level = level;
         this.type = type;
-        this.damage = damage;
         this.icon = icon;
     }
 
-    upgrade(skillConfig: SkillConfig): void {
-        const {tickInterval, damage} = skillConfig;
+    upgrade(skillConfig: SkillUpgradePayload): void {
+        const {tickInterval, level, range} = skillConfig;
 
-        this.level = this.level + 1;
-        this.damage = damage;
         this.tickInterval = tickInterval;
+        this.range = range;
+        this.level = level;
     }
 }

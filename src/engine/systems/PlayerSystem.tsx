@@ -5,12 +5,11 @@ import {CANVAS_OPTION, CONTAINER_NAMES, LAYERS, WORLD_SETTINGS} from "../config"
 import {GameCamera} from "../entities/Camera";
 import {Projectile} from "../entities/Projectile";
 import {Enemy} from "../entities/Enemy";
-import * as projectileConfig from "../../configurations/projectile.config.json"
+import * as projectileConfig from "../../configurations/skills/projectile.config.json"
 import {Skill} from "../entities/Skill";
-import * as levelExperience from "../../configurations/level.experience.config.json"
+import * as levelExperience from "../../configurations/player/level.experience.config.json"
 import {generateRandomSpawnPoint, getEnemiesInRange} from "../utils";
 import {DIRECTION} from "../../types";
-import * as SKILL_ICONS from '../../configurations/skill.icons.config.json';
 
 export class PlayerSystem {
     containerMap: Record<string, any>
@@ -24,7 +23,7 @@ export class PlayerSystem {
     levelText: PIXI.Text;
     gameState: any;
     experienceRequired: Record<number, number>;
-    goToEndScreen: any
+    goToEndScreen: () => void;
 
     constructor(
         player: Player,
