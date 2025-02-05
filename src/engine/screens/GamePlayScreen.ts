@@ -107,4 +107,10 @@ export class GamePlayScreen {
     addPlayerLevel() {
         this.player.experience += 50;
     }
+
+    getGameState = () => {
+        return {
+            enemyList: this.enemyList,
+        }
+    }
 }

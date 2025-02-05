@@ -46,4 +46,14 @@ export class GameEngine {
 
         this.currentScreen.addPlayerLevel();
     }
+
+    getGameState() {
+        if (!this.currentScreen) {
+            return;
+        }
+
+        if (this.currentScreen.screenType === 'GamePlayScreen') {
+            console.log(this.currentScreen.getGameState());
+        }
+    }
 }
