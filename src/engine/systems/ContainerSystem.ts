@@ -8,7 +8,6 @@ import {buildUpgradePopup} from "../../configurations/skills/upgrade.popup.build
 export class ContainerSystem {
     containerMap: Record<string, Container>
     textureMap: Record<string, Texture>
-    // mainApp: PIXI.Application;
     mainContainer: Container;
 
     constructor(

@@ -18,7 +18,7 @@ export class SpawnSystem {
         this.enemyList = enemyList;
         this.spawnSpeed = 5;
         this.spawnTick = 1;
-        this.spawnMaxTick = 300;
+        this.spawnMaxTick = 100;
         this.containerMap = containerMap;
     }
 
