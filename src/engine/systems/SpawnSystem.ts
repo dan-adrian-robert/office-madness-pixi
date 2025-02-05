@@ -1,8 +1,8 @@
 import {Enemy} from "../entities/Enemy";
 import {Container} from "pixi.js";
 import {CONTAINER_NAMES} from "../config";
-import * as enemyConfig from '../../configurations/enemy/enemy.config.json';
 import {generateRandomSpawnPoint} from "../utils";
+import {getEnemyConfiguration} from "../../configurations/enemy/enemy.config.builder";
 
 export class SpawnSystem {
     containerMap: Record<string, Container> = {};
@@ -30,7 +30,7 @@ export class SpawnSystem {
         this.spawnTick += this.spawnSpeed;
 
         if (this.spawnTick >= this.spawnMaxTick) {
-            const enemy = new Enemy(enemyConfig);
+            const enemy = new Enemy(getEnemyConfiguration());
             enemy.container.position = generateRandomSpawnPoint();
 
             this.containerMap[CONTAINER_NAMES.WORLD].addChild(enemy.container);

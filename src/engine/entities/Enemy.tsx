@@ -3,6 +3,7 @@ import {PointData} from "pixi.js/lib/maths/point/PointData";
 import {buildContainer} from "../utils";
 import {AnimatedSprite, Texture} from "pixi.js";
 import {DIRECTION} from "../../types";
+import {EnemyConfigPayload} from "../types/types";
 
 export class Enemy {
     speed: number;
@@ -16,21 +17,23 @@ export class Enemy {
     direction: DIRECTION = DIRECTION.RIGHT;
     lastAnimation: string;
 
-    constructor(config: any) {
-        const {metadata, containerConfig} = config;
+    constructor(config: EnemyConfigPayload) {
+        const {metadata, containerConfig, textureConfig} = config;
+
         this.container = buildContainer(containerConfig);
 
-        const test = PIXI.Assets.cache.get("/assets/mobs/zombie.json")
+        const {path, animationStart, animationSpeed} = textureConfig;
 
-        this.animations = test.animations;
+        const enemyTexture = PIXI.Assets.cache.get(path)
 
-        this.lastAnimation = 'walk/tile';
-        this.characterSprite = new PIXI.AnimatedSprite(this.animations['walk/tile']);
-        this.characterSprite.animationSpeed = 0.2;
-        this.characterSprite.setSize(64);
+        this.animations = enemyTexture.animations;
+
+        this.lastAnimation = animationStart;
+        this.characterSprite = new PIXI.AnimatedSprite(this.animations[animationStart]);
+        this.characterSprite.animationSpeed = animationSpeed;
+        this.characterSprite.setSize(textureConfig.size);
         this.characterSprite.play();
         this.container.addChild(this.characterSprite);
-
 
         const {bounty, hitpoints, size, speed} = metadata
         this.hitpoints = hitpoints;

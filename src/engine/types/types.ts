@@ -51,3 +51,18 @@ export type PlayerConstructorPayload = {
     animationConfig: AnimatedConfigPayload,
 }
 
+export type EnemyConfigPayload = {
+    metadata: {
+        size: PointData
+        speed: number,
+        bounty: number,
+        hitpoints: number,
+    },
+    containerConfig: BuildContainerConfig,
+    textureConfig: {
+        path: string,
+        animationStart: string,
+        animationSpeed: number,
+        size: number
+    },
+}
