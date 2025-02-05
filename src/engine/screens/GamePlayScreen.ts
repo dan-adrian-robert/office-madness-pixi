@@ -46,7 +46,7 @@ export class GamePlayScreen {
         this.mainContainer.name = "GamePlayScreen";
         app.stage.addChild(this.mainContainer);
 
-        this.camera = new GameCamera({x: 0, y: 0});
+        this.camera = new GameCamera({x: 0, y: 0}, 15);
 
         this.containerSystem = new ContainerSystem(this.containerMap, this.mainContainer, this.textureMap);
         this.keySystem = new KeySystem(this.keysPressed);

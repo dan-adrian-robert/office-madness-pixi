@@ -1,29 +1,24 @@
 import * as PIXI from "pixi.js";
 import {PointData} from "pixi.js/lib/maths/point/PointData";
 
+const defaultPoint: PointData = {x: 0, y: 0};
+
 export class GameCamera {
-    speed: number = 15;
+    speed: number;
     dragging: boolean = false;
-    drag: PointData = {
-        x: 0,
-        y: 0,
-    }
+    drag: PointData;
+    dragStart: PointData;
+    poz: PointData;
 
-    dragStart: PointData = {
-        x: 0,
-        y: 0,
-    };
-
-    poz: PointData = {
-        x: 0,
-        y: 0,
-    }
-
-    constructor(poz: PointData) {
+    constructor(poz: PointData, cameraSpeed: number) {
         this.poz = poz;
+        this.drag = defaultPoint;
+        this.dragStart = defaultPoint;
+        this.poz = defaultPoint;
+        this.speed = cameraSpeed;
     }
 
-    onPointerDown = (event: PIXI.FederatedPointerEvent) => {
+    onPointerDown = (event: PIXI.FederatedPointerEvent): void => {
         this.dragging = true;
         this.drag.x = event.clientX;
         this.drag.y = event.clientY;
@@ -31,7 +26,7 @@ export class GameCamera {
         this.dragStart.y = this.poz.y;
     }
 
-    onPointerMove = (event: PIXI.FederatedPointerEvent) => {
+    onPointerMove = (event: PIXI.FederatedPointerEvent): void => {
         const dragDeltaX = event.clientX - this.drag.x;
         const dragDeltaY = event.clientY - this.drag.y;
 
@@ -39,7 +34,7 @@ export class GameCamera {
         this.poz.y = this.dragStart.y + dragDeltaY;
     }
 
-    resetDragging = () => {
+    resetDragging = (): void => {
         this.dragging = false;
     }
 }
