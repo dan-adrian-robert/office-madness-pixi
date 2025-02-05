@@ -14,6 +14,7 @@ import playerConfig from "../../configurations/player/player.config.json";
 import {Enemy} from "../entities/Enemy";
 import {Projectile} from "../entities/Projectile";
 import skillLevelConfig from '../../configurations/skills/skill.levels.json'
+import {GameSettings} from "../types/types";
 
 export class GamePlayScreen {
     screenType: string = 'GamePlayScreen';
@@ -39,7 +40,7 @@ export class GamePlayScreen {
     gameState: any;
     gameLoopFunction: any;
 
-    constructor(app: PIXI.Application, gameState: any, goToFunction: any) {
+    constructor(app: PIXI.Application, gameState: GameSettings, goToFunction: any) {
         this.app = app;
         this.gameState = gameState;
         this.mainContainer = new PIXI.Container();
@@ -82,7 +83,7 @@ export class GamePlayScreen {
         this.playerSystem.init();
         this.upgradeSystem.init();
 
-        this.gameLoopFunction = (delta: PIXI.Ticker)=> {
+        this.gameLoopFunction = (delta: PIXI.Ticker) => {
             if(this.gameState.paused) {
                 return;
             }

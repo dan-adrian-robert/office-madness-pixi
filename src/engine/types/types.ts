@@ -66,3 +66,9 @@ export type EnemyConfigPayload = {
         size: number
     },
 }
+
+export type GameSettings = {
+    paused: boolean,
+    spawnEnemies: boolean,
+    shoot: boolean,
+};

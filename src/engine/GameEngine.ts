@@ -2,14 +2,14 @@ import * as PIXI from "pixi.js";
 import {CANVAS_OPTION} from "./config";
 import {GamePlayScreen} from "./screens/GamePlayScreen";
 import {GameOverScreen} from "./screens/GameOverScreen";
-import {MenuScreen} from "./screens/MenuScreen";
+import {GameSettings} from "./types/types";
 
 export class GameEngine {
     mainApp: PIXI.Application;
-    gameState: {
-        paused: boolean,
-    } = {
+    gameState: GameSettings = {
         paused: false,
+        spawnEnemies: false,
+        shoot: false,
     }
 
     currentScreen: any;
