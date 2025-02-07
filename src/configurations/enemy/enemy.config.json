@@ -1,27 +1,137 @@
 {
-  "metadata": {
-    "size": {
-      "x": 32,
-      "y": 32
+  "zombie": {
+    "metadata": {
+      "size": {
+        "x": 32,
+        "y": 32
+      },
+      "speed": 5,
+      "bounty": 10,
+      "hitpoints": 50
     },
-    "speed": 5,
-    "bounty": 10,
-    "hitpoints": 50
-  },
-  "textureConfig": {
-    "path": "/assets/mobs/zombie.json",
-    "animationStart": "walk/tile",
-    "animationSpeed": 0.2,
-    "size": 64
-  },
-  "containerConfig": {
-    "zIndex": 200,
-    "name": "enemy",
-    "position": {
-      "x": 256,
-      "y": 256
+    "textureConfig": {
+      "path": "/assets/mobs/zombie.json",
+      "animationStart": "walk/tile",
+      "animationSpeed": 0.2,
+      "size": 64
     },
-    "width": 64,
-    "height": 64
+    "containerConfig": {
+      "zIndex": 200,
+      "name": "enemy",
+      "position": {
+        "x": 256,
+        "y": 256
+      },
+      "width": 64,
+      "height": 64
+    }
+  },
+  "knight": {
+    "metadata": {
+      "size": {
+        "x": 64,
+        "y": 64
+      },
+      "speed": 5,
+      "bounty": 10,
+      "hitpoints": 50
+    },
+    "textureConfig": {
+      "path": "/assets/mobs/knight.json",
+      "animationStart": "tile",
+      "animationSpeed": 0.3,
+      "size": 96
+    },
+    "containerConfig": {
+      "zIndex": 200,
+      "name": "knight",
+      "position": {
+        "x": 256,
+        "y": 256
+      },
+      "width": 120,
+      "height": 40
+    }
+  },
+  "death": {
+    "metadata": {
+      "size": {
+        "x": 64,
+        "y": 64
+      },
+      "speed": 5,
+      "bounty": 10,
+      "hitpoints": 50
+    },
+    "textureConfig": {
+      "path": "/assets/mobs/death.json",
+      "animationStart": "walk",
+      "animationSpeed": 0.05,
+      "size": 96
+    },
+    "containerConfig": {
+      "zIndex": 200,
+      "name": "death",
+      "position": {
+        "x": 256,
+        "y": 256
+      },
+      "width": 120,
+      "height": 40
+    }
+  },
+  "wizard": {
+    "metadata": {
+      "size": {
+        "x": 64,
+        "y": 64
+      },
+      "speed": 5,
+      "bounty": 10,
+      "hitpoints": 50
+    },
+    "textureConfig": {
+      "path": "/assets/mobs/wizard.json",
+      "animationStart": "walk/tile",
+      "animationSpeed": 0.15,
+      "size": 64
+    },
+    "containerConfig": {
+      "zIndex": 200,
+      "name": "death",
+      "position": {
+        "x": 256,
+        "y": 256
+      },
+      "width": 120,
+      "height": 40
+    }
+  },
+  "ghost": {
+    "metadata": {
+      "size": {
+        "x": 24,
+        "y": 26
+      },
+      "speed": 5,
+      "bounty": 10,
+      "hitpoints": 50
+    },
+    "textureConfig": {
+      "path": "/assets/mobs/ghost.json",
+      "animationStart": "walk/tile",
+      "animationSpeed": 0.1,
+      "size": 48
+    },
+    "containerConfig": {
+      "zIndex": 200,
+      "name": "ghost",
+      "position": {
+        "x": 256,
+        "y": 256
+      },
+      "width": 120,
+      "height": 40
+    }
   }
 }

@@ -28,7 +28,6 @@ export const createGraphics = (width: number, height: number): PIXI.Graphics => 
     return rectangle;
 }
 
-
 export const buildContainersStructure = (config: any, name: string) => {
     const nameList = Object.keys(config);
 
@@ -72,6 +71,26 @@ export const loadAllTextures = async ():Promise<Array<{name: string, texture: an
         '/assets/mobs/zombie.json',
     ]);
 
+    const knight = await Assets.load([
+        '/assets/mobs/knight.png',
+        '/assets/mobs/knight.json',
+    ]);
+
+    const death = await Assets.load([
+        '/assets/mobs/death.png',
+        '/assets/mobs/death.json',
+    ]);
+
+    const wizard = await Assets.load([
+        '/assets/mobs/wizard.png',
+        '/assets/mobs/wizard.json',
+    ]);
+
+    const ghost = await Assets.load([
+        '/assets/mobs/ghost.png',
+        '/assets/mobs/ghost.json',
+    ]);
+
     const skillIcons = await PIXI.Assets.load([
         '/assets/skills/skill_icons.json'
     ]);
@@ -85,6 +104,10 @@ export const loadAllTextures = async ():Promise<Array<{name: string, texture: an
         {name: "skillCard", texture: skillCard},
         {name: "upgradeBg", texture: upgradeBg},
         {name: "skillsIcons", texture: skillIcons},
+        {name: "knight", texture: knight},
+        {name: "death", texture: death},
+        {name: "wizard", texture: wizard},
+        {name: "ghost", texture: ghost},
     ];
 }
 
