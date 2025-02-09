@@ -8,7 +8,7 @@ import {EnemySystem} from "../systems/EnemySystem";
 import {SpawnSystem} from "../systems/SpawnSystem";
 import {ProjectileSystem} from "../systems/ProjectileSystem";
 import {UpgradeSystem} from "../systems/UpgradeSystem";
-import {Container, Texture} from "pixi.js";
+import {Container} from "pixi.js";
 import {Player} from "../entities/Player";
 import playerConfig from "../../configurations/player/player.config.json";
 import {Enemy} from "../entities/Enemy";
@@ -24,7 +24,7 @@ export class GamePlayScreen {
     camera: GameCamera;
     keysPressed: Record<string, boolean> = {};
     containerMap: Record<string, Container> = {};
-    textureMap: Record<string, Texture> = {};
+
     player: Player  = new Player(playerConfig);
     enemyList: Array<Enemy> = [];
     projectileList: Array<Projectile> = [];
@@ -37,7 +37,7 @@ export class GamePlayScreen {
     spawnSystem: SpawnSystem;
     projectileSystem: ProjectileSystem;
     upgradeSystem: UpgradeSystem;
-    gameState: any;
+    gameState: GameSettings;
     gameLoopFunction: any;
 
     constructor(app: PIXI.Application, gameState: GameSettings, goToFunction: any) {
@@ -49,7 +49,7 @@ export class GamePlayScreen {
 
         this.camera = new GameCamera({x: 0, y: 0}, 15);
 
-        this.containerSystem = new ContainerSystem(this.containerMap, this.mainContainer, this.textureMap);
+        this.containerSystem = new ContainerSystem(this.containerMap, this.mainContainer);
         this.keySystem = new KeySystem(this.keysPressed);
         this.cameraSystem = new CameraSystem(this.camera, this.containerMap, this.keysPressed, this.mainContainer);
 
@@ -94,6 +94,8 @@ export class GamePlayScreen {
             this.spawnSystem.run();
             this.playerSystem.run(delta);
             this.upgradeSystem.run();
+
+            console.log('containerMap', this.containerMap);
         }
 
         this.app.ticker.add(this.gameLoopFunction);

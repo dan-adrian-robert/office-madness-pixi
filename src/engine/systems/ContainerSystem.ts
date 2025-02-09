@@ -1,4 +1,4 @@
-import {Container, Texture} from "pixi.js";
+import {Container} from "pixi.js";
 import * as PIXI from "pixi.js";
 import {CONTAINER_NAMES, LAYERS, WORLD_SETTINGS} from "../config";
 import  UIContainer from "../../configurations/ui/ui.config.json";
@@ -7,17 +7,14 @@ import {buildUpgradePopup} from "../../configurations/skills/upgrade.popup.build
 
 export class ContainerSystem {
     containerMap: Record<string, Container>
-    textureMap: Record<string, Texture>
     mainContainer: Container;
 
     constructor(
         containerMap:  Record<string, Container>,
         mainContainer: Container,
-        textureMap: Record<string, Texture>
     ) {
         this.containerMap = containerMap;
         this.mainContainer = mainContainer;
-        this.textureMap = textureMap;
     }
 
     init() {
